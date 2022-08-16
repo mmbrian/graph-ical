@@ -1,0 +1,202 @@
+@prefix data: <http://localhost:8080/data/test/> .
+@prefix entities: <http://www.pxio.de/cloud/entities/#> .
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+@prefix pxio: <http://www.pxio.de/rdf#> .
+@prefix pxiopeople: <http://www.pxio.de/people/about/#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix res: <http://localhost:8000/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix dc: <http://purl.org/dc/elements/1.1/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix sp: <http://spinrdf.org/sp#> .
+@prefix spin: <http://spinrdf.org/spin#> .
+
+<http://www.pxio.de/rdf> a owl:Ontology;
+  dc:title "The Pxio vocabulary (pxio)";
+  rdfs:seeAlso <http://www.pxio.de/rdf-more> .
+  
+# NOTE: can validate data via https://shacl.org/playground/
+
+# a generic name predicate that can apply to any rdfs:Class based type
+pxio:name a owl:ObjectProperty, rdf:Property;
+	rdfs:label "Name";
+	rdfs:comment "This property represents a name in our system";
+	rdfs:isDefinedBy <http://www.pxio.de/rdf#>;
+	rdfs:domain rdfs:Class;
+	rdfs:range xsd:string .
+
+# class for a group of users_ complements foaf:Group by allowing foaf:member as a prop
+# using shacl we contrain a group instance to 
+# 1. have a pxio:name with minimum length of 2 characters
+# 2. have 1 owner set as foaf:maker (of pxio:User type)
+pxio:UserGroup a rdfs:Class, owl:Class, sh:NodeShape;
+	rdfs:label "UserGroup";
+	rdfs:comment "This class represents a group of users defined in our system";
+	rdfs:isDefinedBy <http://www.pxio.de/rdf#>;
+	rdfs:subClassOf foaf:Group;
+	rdfs:subClassOf owl:Thing;
+	sh:property [
+        sh:path pxio:name ;
+        sh:name "Group name" ;
+        sh:description "Name for a user group" ;
+        sh:datatype xsd:string ;
+        sh:maxCount 1 ;
+        sh:minCount 1 ;
+		sh:minLength 2 ;
+    ] ;
+	sh:property [
+        sh:path foaf:maker ;
+        sh:name "Group owner" ;
+        sh:description "Owner of a user group" ;
+        sh:class pxio:User ;
+        sh:maxCount 1 ;
+        sh:minCount 1 ;
+    ] .
+
+# a class for Users based on foaf:Person
+# we force each user to either provide both firstName and lastName or have a single name via foaf:name with minimum length of 2 characters
+# it cannot have both (i.e. foaf:name and (foaf:firstName, foaf:lastName))
+pxio:User a rdfs:Class, owl:Class, sh:NodeShape;
+	rdfs:label "User";
+	rdfs:comment "This class represents a user in our system";
+	rdfs:isDefinedBy <http://www.pxio.de/rdf#>;
+	rdfs:subClassOf foaf:Person;
+	sh:xone (
+		[
+			sh:property [
+				sh:path foaf:name ;
+				sh:minCount 1 ;
+				sh:maxCount 1 ;
+				sh:minLength 2 ;
+			]
+		]
+		[
+			sh:and (
+				sh:property [
+					sh:path foaf:firstName ;
+					sh:minCount 1 ;
+					sh:maxCount 1 ;
+					sh:minLength 2 ;
+				]
+				sh:property [
+					sh:path foaf:lastName ;
+					sh:minCount 1 ;
+					sh:maxCount 1 ;
+					sh:minLength 2 ;
+				]
+			)
+		]
+	);
+	spin:rule [
+		a sp:Construct ;
+		sp:text """
+		   CONSTRUCT { ?this rdfs:subClassOf ?grandParent . }
+		   WHERE { 
+				?this rdfs:subClassOf ?parent . 
+				?parent rdfs:subClassOf ?grandParent . 
+				
+		   }"""
+	] .
+
+data:groups_dev a pxio:UserGroup;
+  foaf:depiction res:audio;
+  foaf:maker pxiopeople:users_mohsen;
+  foaf:member pxiopeople:users_mohsen;
+  foaf:member pxiopeople:users_al;
+  foaf:member pxiopeople:users_paul;
+  foaf:name "Dev Team" .
+
+data:groups_sales a pxio:UserGroup;
+  foaf:maker pxiopeople:users_al;
+  foaf:member pxiopeople:users_al;
+  foaf:member pxiopeople:users_tim;
+  foaf:name "Sales Team" .
+
+pxiopeople:users_mohsen a pxio:User;
+  foaf:name "Mohsen" .
+  
+pxiopeople:users_testuser a foaf:Person;
+  foaf:name "Test User" .
+
+pxiopeople:users_al a pxio:User;
+  foaf:name "Alex" .
+
+pxiopeople:users_tim a pxio:User;
+  foaf:name "Tim" .
+
+pxiopeople:users_paul a pxio:User;
+  foaf:name "Paul" .
+
+data:users_andre a pxio:User;
+  foaf:name "Andre" .
+
+entities:DisplayGroup rdfs:label "Display Group";
+  rdfs:subClassOf rdfs:Class .
+
+data:dg_dg1 a entities:DisplayGroup;
+  foaf:maker pxiopeople:users_mohsen;
+  foaf:name "DG1" .
+
+entities:Display rdfs:label "Display";
+  rdfs:subClassOf rdfs:Class .
+
+data:disp_d1 a entities:Display;
+  foaf:maker pxiopeople:users_tim;
+  foaf:member data:dg_dg1;
+  foaf:name "steve.pxio.local" .
+
+data:disp_d2 a entities:Display;
+  foaf:maker pxiopeople:users_al;
+  foaf:name "Alex's Display" .
+
+data:disp_d3 a entities:Display;
+  foaf:maker pxiopeople:users_mohsen;
+  foaf:name "pompei.pxio.local.network" .
+
+data:disp_d4 a entities:Display;
+  pxio:sharedWith pxiopeople:users_al;
+  foaf:maker pxiopeople:users_mohsen;
+  foaf:name "norbert" .
+
+entities:PixelSource rdfs:label "Pixel Source";
+  rdfs:subClassOf rdfs:Class .
+
+data:source_s12 a entities:PixelSource;
+  pxio:sharedWith pxiopeople:users_al;
+  foaf:maker pxiopeople:users_mohsen;
+  foaf:name "Cat Heaven: where cats go if they play their cards right" .
+
+data:source_s13 a entities:PixelSource;
+  foaf:depiction res:graph;
+  foaf:name "Demo Video 1" .
+
+data:source_s14 a entities:PixelSource;
+  foaf:name "Demo Video 2" .
+
+data:source_s15 a entities:PixelSource;
+  foaf:name "Tim's Screen" .
+
+data:source_s16 a entities:PixelSource;
+  foaf:name "Andre's Phone" .
+
+data:source_s17 a entities:PixelSource;
+  foaf:name "Mohsen's iPhone" .
+
+data:source_s18 a entities:PixelSource;
+  foaf:name "Who's Cat is the Cutest?" .
+
+data:source_s20 a entities:PixelSource;
+  foaf:name "Cats or Dogs? Get to know yourself" .
+
+data:source_s21 a entities:PixelSource;
+  foaf:name "All my Cats" .
+
+data:source_s22 a entities:PixelSource;
+  foaf:name "Perfect Human: Inside a Cat's Mind" .
+
+data:source_s23 a entities:PixelSource;
+  foaf:img res:cat;
+  foaf:name "Not just a Cat" .

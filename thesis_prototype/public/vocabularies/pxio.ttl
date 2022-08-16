@@ -1,0 +1,173 @@
+@prefix data: <http://localhost:8080/data/test/> .
+@prefix entities: <http://www.pxio.de/cloud/entities/#> .
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+@prefix pxio: <http://www.pxio.de/rdf#> .
+@prefix pxiopeople: <http://www.pxio.de/people/about/#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix res: <http://localhost:8000/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix dc: <http://purl.org/dc/elements/1.1/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix sp: <http://spinrdf.org/sp#> .
+@prefix spin: <http://spinrdf.org/spin#> .
+
+<http://www.pxio.de/rdf> a owl:Ontology;
+  dc:title "The Pxio vocabulary (pxio)";
+  rdfs:seeAlso <http://www.pxio.de/rdf-more> .
+  
+# NOTE: can validate data via https://shacl.org/playground/
+
+# a generic name predicate that can apply to any rdfs:Class based type
+pxio:name a owl:ObjectProperty, rdf:Property;
+	rdfs:label "Name";
+	rdfs:comment "This property represents a name in our system";
+	rdfs:isDefinedBy <http://www.pxio.de/rdf#>;
+	rdfs:domain rdfs:Class;
+	rdfs:range xsd:string .
+# class for a group of users_ complements foaf:Group by allowing foaf:member as a prop
+# using shacl we contrain a group instance to 
+# 1. have a pxio:name with minimum length of 2 characters
+# 2. have 1 owner set as foaf:maker (of pxio:User type)
+pxio:UserGroup a rdfs:Class, owl:Class, sh:NodeShape;
+	rdfs:label "UserGroup";
+	rdfs:comment "This class represents a group of users defined in our system";
+	rdfs:isDefinedBy <http://www.pxio.de/rdf#>;
+	rdfs:subClassOf foaf:Group;
+	rdfs:subClassOf owl:Thing;
+	sh:property [
+        sh:path pxio:name ;
+        sh:name "Group name" ;
+        sh:description "Name for a user group" ;
+        sh:datatype xsd:string ;
+        sh:maxCount 1 ;
+        sh:minCount 1 ;
+		sh:minLength 2 ;
+    ] ;
+	sh:property [
+        sh:path foaf:maker ;
+        sh:name "Group owner" ;
+        sh:description "Owner of a user group" ;
+        sh:class pxio:User ;
+        sh:maxCount 1 ;
+        sh:minCount 1 ;
+    ] .
+
+# a class for Users based on foaf:Person
+# we force each user to either provide both firstName and lastName or have a single name via foaf:name with minimum length of 2 characters
+# it cannot have both (i.e. foaf:name and (foaf:firstName, foaf:lastName))
+pxio:User a rdfs:Class, owl:Class, sh:NodeShape;
+	rdfs:label "User";
+	rdfs:comment "This class represents a user in our system";
+	rdfs:isDefinedBy <http://www.pxio.de/rdf#>;
+	rdfs:subClassOf foaf:Person;
+	sh:xone (
+		[
+			sh:property [
+				sh:path foaf:name ;
+				sh:minCount 1 ;
+				sh:maxCount 1 ;
+				sh:minLength 2 ;
+			]
+		]
+		[
+			sh:and (
+				sh:property [
+					sh:path foaf:firstName ;
+					sh:minCount 1 ;
+					sh:maxCount 1 ;
+					sh:minLength 2 ;
+				]
+				sh:property [
+					sh:path foaf:lastName ;
+					sh:minCount 1 ;
+					sh:maxCount 1 ;
+					sh:minLength 2 ;
+				]
+			)
+		]
+	);
+	spin:rule [
+		a sp:Construct ;
+		sp:text """
+		   CONSTRUCT { ?this rdfs:subClassOf ?grandParent . }
+		   WHERE { 
+				?this rdfs:subClassOf ?parent . 
+				?parent rdfs:subClassOf ?grandParent . 
+				
+		   }"""
+	] .
+	
+	
+	
+	
+	
+	sh:rule [
+		a sh:SPARQLRule ;
+		sh:prefixes rdfs: ;
+		sh:construct """
+		   CONSTRUCT { ?this rdfs:subClassOf ?grandParent . }
+		   WHERE { 
+				?this rdfs:subClassOf ?parent . 
+				?parent rdfs:subClassOf ?grandParent . 
+				
+		   }"""
+	] .
+	
+
+## every person who has a parent is a child of that parent.
+rdfs:Class a rdfs:Class ;
+	sh:rule [
+		a sh:SPARQLRule ;
+		sh:prefixes rdfs: ;
+		sh:construct """
+		   CONSTRUCT { ?this rdfs:subClassOf ?grandParent . }
+		   WHERE { 
+				?this rdfs:subClassOf ?parent . 
+				?parent rdfs:subClassOf ?grandParent . 
+				
+		   }"""
+] .
+
+pxio:role a owl:DatatypeProperty, rdf:Property;
+	rdfs:label "Role";
+	rdfs:comment "Role of a user that determines their privileges";
+	rdfs:isDefinedBy <http://www.pxio.de/rdf#>;
+	rdfs:domain pxio:User;
+    rdfs:range [
+        a rdfs:Datatype;
+        owl:oneOf ( "admin" "user" "guest" )
+    ] .
+	
+pxio:Shareable a rdfs:Class, owl:Class;
+	rdfs:label "Shareable";
+	rdfs:comment "This class represents something that is shareable in our system";
+	rdfs:isDefinedBy <http://www.pxio.de/rdf#> .
+
+pxio:sharedWith a owl:ObjectProperty, rdf:Property;
+	rdfs:label "SharedWith";
+	rdfs:comment "This property represents sharing between a Shareable and a User/Group in our system";
+	rdfs:isDefinedBy <http://www.pxio.de/rdf#>;
+	rdfs:domain pxio:Shareable;
+	rdfs:range pxio:UserGroup, pxio:User .
+
+pxio:Display a rdfs:Class, owl:Class;
+	rdfs:label "Display";
+	rdfs:comment "This class represents a physical display in our system";
+	rdfs:isDefinedBy <http://www.pxio.de/rdf#>;
+	rdfs:subClassOf pxio:Shareable .
+
+pxio:DisplayGroup a rdfs:Class, owl:Class;
+	rdfs:label "DisplayGroup";
+	rdfs:comment "This class represents an arrangement of displays in our system";
+	rdfs:isDefinedBy <http://www.pxio.de/rdf#>;
+	rdfs:subClassOf pxio:Shareable .
+
+pxio:hasDisplay a owl:ObjectProperty, rdf:Property;
+	rdfs:label "HasDisplay";
+	rdfs:comment "This property represents membership between a DisplayGroup and Display in our system";
+	rdfs:isDefinedBy <http://www.pxio.de/rdf#>;
+	rdfs:domain pxio:DisplayGroup;
+	rdfs:range pxio:Display .

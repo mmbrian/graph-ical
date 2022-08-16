@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+</head>
+<body class="move_cursor">
+    <i id="legend-toggle" class="legend-toggle fas fa-info-circle"></i>
+    <div id="legend-area" class="legend-container hidden">
+        <div class="legend-row">
+            <span class="legend-indicator display-legend"></span>
+            <span>Display</span>
+        </div>
+        <div class="legend-row">
+            <span class="legend-indicator display-group-legend"></span>
+            <span>Display Group</span>
+        </div>
+        <div class="legend-row">
+            <span class="legend-indicator pixel-source-legend"></span>
+            <span>Pixel Source</span>
+        </div>
+        <div class="legend-row">
+            <span class="legend-indicator user-legend"></span>
+            <span>User</span>
+        </div>
+        <div class="legend-row">
+            <span class="legend-indicator group-legend"></span>
+            <span>Group</span>
+        </div>
+        <div class="legend-row">
+            <span class="legend-indicator ownership-legend"></span>
+            <span>Ownership Relation</span>
+        </div>
+        <div class="legend-row">
+            <span class="legend-indicator membership-legend"></span>
+            <span>Membership Relation</span>
+        </div>
+        <div class="legend-row">
+            <span class="legend-indicator sharing-legend"></span>
+            <span>Sharing Relation</span>
+        </div>
+        <div class="legend-row">
+            <span class="legend-indicator projection-legend"></span>
+            <span>Projection Relation</span>
+        </div>
+    </div>
+    <div class="search_container">
+        <input id="search_input" class="search_input" type="text" value="" placeholder="Search...">
+        <!-- <input type="file" id="upload">
+        <button id="store">Store</button>
+        <button id="load">Load</button>
+        <button id="sparql-query">Query</button> -->
+    </div>
+    <div class="cursor-element not-allowed">
+        <div class="cursor-content">
+            <span class="title"></span>
+            <input type="text" class="rename hidden"/>
+        </div>
+        <i class="icon_content fas fa-cut hidden"></i>
+    </div>
+</body>
+</html>

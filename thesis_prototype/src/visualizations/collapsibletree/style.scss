@@ -1,0 +1,58 @@
+.tree_selected {
+    .tree_content {
+        overflow-x: scroll;
+        svg {
+            position: relative;
+            top: 30px;
+            left: 0;
+            .node circle {
+                fill: #fff;
+                stroke: steelblue;
+                stroke-width: 3px;
+            }
+
+            .node text {
+                font: 12px sans-serif;
+            }
+
+            path.link {
+                fill: none;
+                stroke: #777;
+                stroke-width: 5px;
+                stroke-linecap: round;
+                pointer-events: all;
+                &:hover {
+                    stroke: #ccc;
+                }
+                &.selected {
+                    stroke: steelblue;
+                }
+            }
+
+            text {
+                fill: black;
+            }
+
+            text.link_label {
+                fill: black;
+                font-size: 1.2em;
+                transition: opacity 0.1s ease-in-out 0s;
+                opacity: 0;
+                &.visible {
+                    opacity: 1;
+                }
+                &.invis {
+                    opacity: 0;
+                }
+                &.force_show_labels {
+                    opacity: 1;
+                }
+            }
+        }
+
+        /* height */
+        &::-webkit-scrollbar {
+            height: 10px;
+        }
+    }
+}

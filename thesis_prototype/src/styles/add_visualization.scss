@@ -1,0 +1,132 @@
+/* The Modal (background) */
+.custom-modal {
+    position: fixed; /* Stay in place */
+    z-index: 100; /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+    cursor: auto;
+}
+
+/* Modal Content/Box */
+.custom-modal-content {
+    background-color: #fefefe;
+    margin: 15% auto; /* 15% from the top and centered */
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%; /* Could be more or less, depending on screen size */
+}
+
+/* Modal Header */
+.custom-modal-header {
+    background-color: #5cb85c;
+    color: white;
+    display: flex;
+    flex-direction: row;
+    height: 48px;
+    span {
+        font-weight: bold;
+        padding-left: 9px;
+        line-height: 48px;
+        width: calc(100% - 48px);
+    }
+    .close {
+        width: 48px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: while;
+        &:hover,
+        &:focus {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
+        }
+    }
+}
+
+/* Modal Body */
+.custom-modal-body {
+    padding: 16px;
+    display: grid;
+    grid-template-columns: 300px 300px 300px;
+    overflow: scroll;
+    &.custom-query {
+        grid-template-columns: auto;
+    }
+    .vis-type {
+        padding: 5px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        span.vis-title {
+            padding: 5px;
+        }
+        &:hover {
+            cursor: pointer;
+            background: #aaa;
+            color: white;
+        }
+        img {
+            height: 200px;
+            width: 300px;
+            object-fit: contain;
+            opacity: 0.8;
+        }
+    }
+    &.entity-selection {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+    }
+    .entity-item {
+        padding: 9px;
+        &:hover {
+            color: white;
+            background: grey;
+            cursor: pointer;
+        }
+    }
+}
+
+/* Modal Footer */
+.custom-modal-footer {
+    background-color: #5cb85c;
+    color: white;
+    &.generic-view-footer {
+        padding: 5px;
+    }
+    &.list-view-footer, &.list-view-custom-query-footer {
+        display: flex;
+        flex-direction: row;
+        span {
+            padding: 5px;
+            &:first-child {
+                color: black;
+            }
+        }
+    }
+}
+
+/* Modal Content */
+.custom-modal-content {
+    position: relative;
+    background-color: #fefefe;
+    margin: auto;
+    padding: 0;
+    border: 1px solid #888;
+    width: 80%;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
+    animation-name: animatetop;
+    animation-duration: 0.4s
+}
+
+/* Add Animation */
+@keyframes animatetop {
+    from {top: -300px; opacity: 0}
+    to {top: 0; opacity: 1}
+}

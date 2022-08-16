@@ -1,0 +1,80 @@
+
+// $visibleAreaWidth: 150px;
+// $invisibleBaseColor: 0;
+// $transientAlpha: 0.9;
+// $invisibleAlpha: 1;
+// $transparentAreaMultiplier: 0.01;
+// $transientAreaMultiplier: 1.1;
+
+$visibleAreaWidth: 200px;
+$invisibleBaseColor: 255;
+$transientAlpha: 0.9;
+$invisibleAlpha: 1;
+$transparentAreaMultiplier: 0.1;
+$transientAreaMultiplier: 1.7;
+
+// $visibleAreaWidth: 300px;
+// $invisibleBaseColor: 255;
+// $transientAlpha: 0.7;
+// $invisibleAlpha: 1;
+// $transparentAreaMultiplier: 0.3;
+// $transientAreaMultiplier: 1.3;
+.overlay-view {
+    pointer-events: none;
+    background: rgba(
+        $invisibleBaseColor, $invisibleBaseColor, $invisibleBaseColor,
+        $invisibleAlpha);
+    opacity: 1;
+    position: fixed;
+    left: 0;
+    top: 0;
+    z-index: 5;
+    &.tl {
+        background: radial-gradient(
+            circle at bottom right,
+            transparent $visibleAreaWidth*$transparentAreaMultiplier,
+            rgba(
+                $invisibleBaseColor, $invisibleBaseColor, $invisibleBaseColor,
+                $transientAlpha) $visibleAreaWidth*$transientAreaMultiplier,
+            rgba(
+                $invisibleBaseColor, $invisibleBaseColor, $invisibleBaseColor,
+                $invisibleAlpha)
+        );
+    }
+    &.tr {
+        background: radial-gradient(
+            circle at bottom left,
+            transparent $visibleAreaWidth*$transparentAreaMultiplier,
+            rgba(
+                $invisibleBaseColor, $invisibleBaseColor, $invisibleBaseColor,
+                $transientAlpha) $visibleAreaWidth*$transientAreaMultiplier,
+            rgba(
+                $invisibleBaseColor, $invisibleBaseColor, $invisibleBaseColor,
+                $invisibleAlpha)
+        );
+    }
+    &.br {
+        background: radial-gradient(
+            circle at top left,
+            transparent $visibleAreaWidth*$transparentAreaMultiplier,
+            rgba(
+                $invisibleBaseColor, $invisibleBaseColor, $invisibleBaseColor,
+                $transientAlpha) $visibleAreaWidth*$transientAreaMultiplier,
+            rgba(
+                $invisibleBaseColor, $invisibleBaseColor, $invisibleBaseColor,
+                $invisibleAlpha)
+        );
+    }
+    &.bl {
+        background: radial-gradient(
+            circle at top right,
+            transparent $visibleAreaWidth*$transparentAreaMultiplier,
+            rgba(
+                $invisibleBaseColor, $invisibleBaseColor, $invisibleBaseColor,
+                $transientAlpha) $visibleAreaWidth*$transientAreaMultiplier,
+            rgba(
+                $invisibleBaseColor, $invisibleBaseColor, $invisibleBaseColor,
+                $invisibleAlpha)
+        );
+    }
+}

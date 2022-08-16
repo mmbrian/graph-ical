@@ -1,0 +1,122 @@
+.tree_selected {
+    position: fixed;
+    top: 200px;
+    right: 100px;
+    width: 400px;
+    height: 330px;
+    background: white;
+    z-index: 10;
+
+    cursor: default;
+    -webkit-box-shadow: 7px 7px 14px -7px rgba(0,0,0,0.45);
+    -moz-box-shadow: 7px 7px 14px -7px rgba(0,0,0,0.45);
+    box-shadow: 7px 7px 14px -7px rgba(0,0,0,0.45);
+    border: 1px solid black;
+
+    .tree_header {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 30px;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        color: white;
+        background: black;
+        cursor: move;
+        span {
+            line-height: 30px;
+            padding-left: 5px;
+        }
+        z-index: 11;
+    }
+
+    .tree_settings_container {
+        width: 100%;
+        height: 100%;
+        margin-top: 30px;
+        padding: 7px;
+        .param-toggle {
+            margin: 0;
+            display: flex;
+            justify-content: space-between;
+            width: calc(100% - 14px);
+        }
+    }
+
+    .tree_content {
+        overflow: hidden;
+        overflow-x: scroll;
+        width: 100%;
+        height: 100%;
+        svg {
+            position: relative;
+            top: 30px;
+            left: 0;
+            .node circle {
+                fill: #fff;
+                stroke: steelblue;
+                stroke-width: 3px;
+            }
+
+            .node text {
+                font: 12px sans-serif;
+            }
+
+            path.link {
+                fill: none;
+                stroke: #777;
+                stroke-width: 5px;
+                stroke-linecap: round;
+                pointer-events: all;
+                &:hover {
+                    stroke: #ccc;
+                }
+                &.selected {
+                    stroke: steelblue;
+                }
+            }
+
+            text {
+                fill: black;
+            }
+
+            text.link_label {
+                fill: black;
+                font-size: 1.2em;
+                transition: opacity 0.1s ease-in-out 0s;
+                opacity: 0;
+                &.visible {
+                    opacity: 1;
+                }
+                &.invis {
+                    opacity: 0;
+                }
+                &.force_show_labels {
+                    opacity: 1;
+                }
+            }
+        }
+
+        /* height */
+        &::-webkit-scrollbar {
+            height: 10px;
+        }
+
+        /* Track */
+        &::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+
+        /* Handle */
+        &::-webkit-scrollbar-thumb {
+            background: #888;
+        }
+
+        /* Handle on hover */
+        &::-webkit-scrollbar-thumb:hover {
+            background: #555;
+        }
+    }
+}

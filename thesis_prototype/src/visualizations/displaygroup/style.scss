@@ -1,0 +1,17 @@
+.dispgroup_container {
+    .dispgroup_content {
+        position: absolute;
+        top: 30px;
+        height: calc(100% - 30px);
+    }
+}
+
+svg.display_group {
+    rect {
+        fill: rgba(40,158,254,1)
+    }
+    text.display-name {
+        pointer-events: none;
+        font-family: Verdana;
+    }
+}

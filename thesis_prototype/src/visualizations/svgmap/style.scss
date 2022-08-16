@@ -1,0 +1,29 @@
+.svgmap_container {
+    .svgmap_content {
+        position: absolute;
+        top: 30px;
+        height: calc(100% - 30px);
+        width: 100%;
+
+        svg {
+          padding: 5px;
+          max-height: calc(100% - 10px);
+          max-width: calc(100% - 10px);
+
+          image {
+            // overflow: visible;
+            filter: grayscale(20%) brightness(75%);
+            opacity: 0.75;
+            &.selected {
+              filter: drop-shadow(2px 4px 6px blue);
+              opacity: 1;
+            }
+          }
+
+          image:hover {
+            filter: none;
+            opacity: 1;
+          }
+        }
+    }
+}

@@ -1,0 +1,1423 @@
+@prefix dc: <http://purl.org/dc/elements/1.1/> .
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+@prefix grddl: <http://www.w3.org/2003/g/data-view#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix vs: <http://www.w3.org/2003/06/sw-vocab-status/ns#> .
+@prefix wot: <http://xmlns.com/wot/0.1/> .
+@prefix xml: <http://www.w3.org/XML/1998/namespace> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<http://www.w3.org/2000/01/rdf-schema#> a owl:Ontology;
+  dc:title "The RDF Schema vocabulary (RDFS)";
+  rdfs:seeAlso <http://www.w3.org/2000/01/rdf-schema-more> .
+
+rdfs:Resource a rdfs:Class;
+  rdfs:comment "The class resource, everything.";
+  rdfs:isDefinedBy <http://www.w3.org/2000/01/rdf-schema#>;
+  rdfs:label "Resource" .
+
+rdfs:Class a rdfs:Class;
+  rdfs:comment "The class of classes.";
+  rdfs:isDefinedBy <http://www.w3.org/2000/01/rdf-schema#>;
+  rdfs:label "Class";
+  rdfs:subClassOf rdfs:Resource .
+
+rdfs:subClassOf a rdf:Property;
+  rdfs:comment "The subject is a subclass of a class.";
+  rdfs:domain rdfs:Class;
+  rdfs:isDefinedBy <http://www.w3.org/2000/01/rdf-schema#>;
+  rdfs:label "subClassOf";
+  rdfs:range rdfs:Class .
+
+rdfs:subPropertyOf a rdf:Property;
+  rdfs:comment "The subject is a subproperty of a property.";
+  rdfs:domain rdf:Property;
+  rdfs:isDefinedBy <http://www.w3.org/2000/01/rdf-schema#>;
+  rdfs:label "subPropertyOf";
+  rdfs:range rdf:Property .
+
+rdfs:comment a rdf:Property;
+  rdfs:comment "A description of the subject resource.";
+  rdfs:domain rdfs:Resource;
+  rdfs:isDefinedBy <http://www.w3.org/2000/01/rdf-schema#>;
+  rdfs:label "comment";
+  rdfs:range rdfs:Literal .
+
+rdfs:label a rdf:Property;
+  rdfs:comment "A human-readable name for the subject.";
+  rdfs:domain rdfs:Resource;
+  rdfs:isDefinedBy <http://www.w3.org/2000/01/rdf-schema#>;
+  rdfs:label "label";
+  rdfs:range rdfs:Literal .
+
+rdfs:domain a rdf:Property;
+  rdfs:comment "A domain of the subject property.";
+  rdfs:domain rdf:Property;
+  rdfs:isDefinedBy <http://www.w3.org/2000/01/rdf-schema#>;
+  rdfs:label "domain";
+  rdfs:range rdfs:Class .
+
+rdfs:range a rdf:Property;
+  rdfs:comment "A range of the subject property.";
+  rdfs:domain rdf:Property;
+  rdfs:isDefinedBy <http://www.w3.org/2000/01/rdf-schema#>;
+  rdfs:label "range";
+  rdfs:range rdfs:Class .
+
+rdfs:seeAlso a rdf:Property;
+  rdfs:comment "Further information about the subject resource.";
+  rdfs:domain rdfs:Resource;
+  rdfs:isDefinedBy <http://www.w3.org/2000/01/rdf-schema#>;
+  rdfs:label "seeAlso";
+  rdfs:range rdfs:Resource .
+
+rdfs:isDefinedBy a rdf:Property;
+  rdfs:comment "The defininition of the subject resource.";
+  rdfs:domain rdfs:Resource;
+  rdfs:isDefinedBy <http://www.w3.org/2000/01/rdf-schema#>;
+  rdfs:label "isDefinedBy";
+  rdfs:range rdfs:Resource;
+  rdfs:subPropertyOf rdfs:seeAlso .
+
+rdfs:Literal a rdfs:Class;
+  rdfs:comment "The class of literal values, eg. textual strings and integers.";
+  rdfs:isDefinedBy <http://www.w3.org/2000/01/rdf-schema#>;
+  rdfs:label "Literal";
+  rdfs:subClassOf rdfs:Resource .
+
+rdfs:Container a rdfs:Class;
+  rdfs:comment "The class of RDF containers.";
+  rdfs:isDefinedBy <http://www.w3.org/2000/01/rdf-schema#>;
+  rdfs:label "Container";
+  rdfs:subClassOf rdfs:Resource .
+
+rdfs:ContainerMembershipProperty a rdfs:Class;
+  rdfs:comment """The class of container membership properties, rdf:_1, rdf:_2, ...,
+                    all of which are sub-properties of 'member'.""";
+  rdfs:isDefinedBy <http://www.w3.org/2000/01/rdf-schema#>;
+  rdfs:label "ContainerMembershipProperty";
+  rdfs:subClassOf rdf:Property .
+
+rdfs:member a rdf:Property;
+  rdfs:comment "A member of the subject resource.";
+  rdfs:domain rdfs:Resource;
+  rdfs:isDefinedBy <http://www.w3.org/2000/01/rdf-schema#>;
+  rdfs:label "member";
+  rdfs:range rdfs:Resource .
+
+rdfs:Datatype a rdfs:Class;
+  rdfs:comment "The class of RDF datatypes.";
+  rdfs:isDefinedBy <http://www.w3.org/2000/01/rdf-schema#>;
+  rdfs:label "Datatype";
+  rdfs:subClassOf rdfs:Class .
+
+<http://www.w3.org/1999/02/22-rdf-syntax-ns#> a owl:Ontology;
+  dc:date "2019-12-16";
+  dc:description "This is the RDF Schema for the RDF vocabulary terms in the RDF Namespace, defined in RDF 1.1 Concepts.";
+  dc:title "The RDF Concepts Vocabulary (RDF)" .
+
+rdf:HTML a rdfs:Datatype;
+  rdfs:comment "The datatype of RDF literals storing fragments of HTML content";
+  rdfs:isDefinedBy <http://www.w3.org/1999/02/22-rdf-syntax-ns#>;
+  rdfs:label "HTML";
+  rdfs:seeAlso <http://www.w3.org/TR/rdf11-concepts/#section-html>;
+  rdfs:subClassOf rdfs:Literal .
+
+rdf:langString a rdfs:Datatype;
+  rdfs:comment "The datatype of language-tagged string values";
+  rdfs:isDefinedBy <http://www.w3.org/1999/02/22-rdf-syntax-ns#>;
+  rdfs:label "langString";
+  rdfs:seeAlso <http://www.w3.org/TR/rdf11-concepts/#section-Graph-Literal>;
+  rdfs:subClassOf rdfs:Literal .
+
+rdf:PlainLiteral a rdfs:Datatype;
+  rdfs:comment "The class of plain (i.e. untyped) literal values, as used in RIF and OWL 2";
+  rdfs:isDefinedBy <http://www.w3.org/1999/02/22-rdf-syntax-ns#>;
+  rdfs:label "PlainLiteral";
+  rdfs:seeAlso <http://www.w3.org/TR/rdf-plain-literal/>;
+  rdfs:subClassOf rdfs:Literal .
+
+rdf:type a rdf:Property;
+  rdfs:comment "The subject is an instance of a class.";
+  rdfs:domain rdfs:Resource;
+  rdfs:isDefinedBy <http://www.w3.org/1999/02/22-rdf-syntax-ns#>;
+  rdfs:label "type";
+  rdfs:range rdfs:Class .
+
+rdf:Property a rdfs:Class;
+  rdfs:comment "The class of RDF properties.";
+  rdfs:isDefinedBy <http://www.w3.org/1999/02/22-rdf-syntax-ns#>;
+  rdfs:label "Property";
+  rdfs:subClassOf rdfs:Resource .
+
+rdf:Statement a rdfs:Class;
+  rdfs:comment "The class of RDF statements.";
+  rdfs:isDefinedBy <http://www.w3.org/1999/02/22-rdf-syntax-ns#>;
+  rdfs:label "Statement";
+  rdfs:subClassOf rdfs:Resource .
+
+rdf:subject a rdf:Property;
+  rdfs:comment "The subject of the subject RDF statement.";
+  rdfs:domain rdf:Statement;
+  rdfs:isDefinedBy <http://www.w3.org/1999/02/22-rdf-syntax-ns#>;
+  rdfs:label "subject";
+  rdfs:range rdfs:Resource .
+
+rdf:predicate a rdf:Property;
+  rdfs:comment "The predicate of the subject RDF statement.";
+  rdfs:domain rdf:Statement;
+  rdfs:isDefinedBy <http://www.w3.org/1999/02/22-rdf-syntax-ns#>;
+  rdfs:label "predicate";
+  rdfs:range rdfs:Resource .
+
+rdf:object a rdf:Property;
+  rdfs:comment "The object of the subject RDF statement.";
+  rdfs:domain rdf:Statement;
+  rdfs:isDefinedBy <http://www.w3.org/1999/02/22-rdf-syntax-ns#>;
+  rdfs:label "object";
+  rdfs:range rdfs:Resource .
+
+rdf:Bag a rdfs:Class;
+  rdfs:comment "The class of unordered containers.";
+  rdfs:isDefinedBy <http://www.w3.org/1999/02/22-rdf-syntax-ns#>;
+  rdfs:label "Bag";
+  rdfs:subClassOf rdfs:Container .
+
+rdf:Seq a rdfs:Class;
+  rdfs:comment "The class of ordered containers.";
+  rdfs:isDefinedBy <http://www.w3.org/1999/02/22-rdf-syntax-ns#>;
+  rdfs:label "Seq";
+  rdfs:subClassOf rdfs:Container .
+
+rdf:Alt a rdfs:Class;
+  rdfs:comment "The class of containers of alternatives.";
+  rdfs:isDefinedBy <http://www.w3.org/1999/02/22-rdf-syntax-ns#>;
+  rdfs:label "Alt";
+  rdfs:subClassOf rdfs:Container .
+
+rdf:value a rdf:Property;
+  rdfs:comment "Idiomatic property used for structured values.";
+  rdfs:domain rdfs:Resource;
+  rdfs:isDefinedBy <http://www.w3.org/1999/02/22-rdf-syntax-ns#>;
+  rdfs:label "value";
+  rdfs:range rdfs:Resource .
+
+rdf:List a rdfs:Class;
+  rdfs:comment "The class of RDF Lists.";
+  rdfs:isDefinedBy <http://www.w3.org/1999/02/22-rdf-syntax-ns#>;
+  rdfs:label "List";
+  rdfs:subClassOf rdfs:Resource .
+
+rdf:nil a rdf:List;
+  rdfs:comment "The empty list, with no items in it. If the rest of a list is nil then the list has no more items in it.";
+  rdfs:isDefinedBy <http://www.w3.org/1999/02/22-rdf-syntax-ns#>;
+  rdfs:label "nil" .
+
+rdf:first a rdf:Property;
+  rdfs:comment "The first item in the subject RDF list.";
+  rdfs:domain rdf:List;
+  rdfs:isDefinedBy <http://www.w3.org/1999/02/22-rdf-syntax-ns#>;
+  rdfs:label "first";
+  rdfs:range rdfs:Resource .
+
+rdf:rest a rdf:Property;
+  rdfs:comment "The rest of the subject RDF list after the first item.";
+  rdfs:domain rdf:List;
+  rdfs:isDefinedBy <http://www.w3.org/1999/02/22-rdf-syntax-ns#>;
+  rdfs:label "rest";
+  rdfs:range rdf:List .
+
+rdf:XMLLiteral a rdfs:Datatype;
+  rdfs:comment "The datatype of XML literal values.";
+  rdfs:isDefinedBy <http://www.w3.org/1999/02/22-rdf-syntax-ns#>;
+  rdfs:label "XMLLiteral";
+  rdfs:subClassOf rdfs:Literal .
+
+rdf:JSON a rdfs:Datatype;
+  rdfs:comment "The datatype of RDF literals storing JSON content.";
+  rdfs:isDefinedBy <http://www.w3.org/1999/02/22-rdf-syntax-ns#>;
+  rdfs:label "JSON";
+  rdfs:seeAlso <https://www.w3.org/TR/json-ld11/#the-rdf-json-datatype>;
+  rdfs:subClassOf rdfs:Literal .
+
+rdf:CompoundLiteral a rdfs:Class;
+  rdfs:comment "A class representing a compound literal.";
+  rdfs:isDefinedBy <http://www.w3.org/1999/02/22-rdf-syntax-ns#>;
+  rdfs:label "CompoundLiteral";
+  rdfs:seeAlso <https://www.w3.org/TR/json-ld11/#the-rdf-compoundliteral-class-and-the-rdf-language-and-rdf-direction-properties>;
+  rdfs:subClassOf rdfs:Resource .
+
+rdf:language a rdf:Property;
+  rdfs:comment "The language component of a CompoundLiteral.";
+  rdfs:domain rdf:CompoundLiteral;
+  rdfs:isDefinedBy <http://www.w3.org/1999/02/22-rdf-syntax-ns#>;
+  rdfs:label "language";
+  rdfs:seeAlso <https://www.w3.org/TR/json-ld11/#the-rdf-compoundliteral-class-and-the-rdf-language-and-rdf-direction-properties> .
+
+rdf:direction a rdf:Property;
+  rdfs:comment "The base direction component of a CompoundLiteral.";
+  rdfs:domain rdf:CompoundLiteral;
+  rdfs:isDefinedBy <http://www.w3.org/1999/02/22-rdf-syntax-ns#>;
+  rdfs:label "direction";
+  rdfs:seeAlso <https://www.w3.org/TR/json-ld11/#the-rdf-compoundliteral-class-and-the-rdf-language-and-rdf-direction-properties> .
+
+<http://www.w3.org/2002/07/owl> a owl:Ontology;
+  dc:title "The OWL 2 Schema vocabulary (OWL 2)";
+  rdfs:comment """
+  This ontology partially describes the built-in classes and
+  properties that together form the basis of the RDF/XML syntax of OWL 2.
+  The content of this ontology is based on Tables 6.1 and 6.2
+  in Section 6.4 of the OWL 2 RDF-Based Semantics specification,
+  available at http://www.w3.org/TR/owl2-rdf-based-semantics/.
+  Please note that those tables do not include the different annotations
+  (labels, comments and rdfs:isDefinedBy links) used in this file.
+  Also note that the descriptions provided in this ontology do not
+  provide a complete and correct formal description of either the syntax
+  or the semantics of the introduced terms (please see the OWL 2
+  recommendations for the complete and normative specifications).
+  Furthermore, the information provided by this ontology may be
+  misleading if not used with care. This ontology SHOULD NOT be imported
+  into OWL ontologies. Importing this file into an OWL 2 DL ontology
+  will cause it to become an OWL 2 Full ontology and may have other,
+  unexpected, consequences.
+   """;
+  rdfs:isDefinedBy <http://www.w3.org/TR/owl2-mapping-to-rdf/>, <http://www.w3.org/TR/owl2-rdf-based-semantics/>,
+    <http://www.w3.org/TR/owl2-syntax/>;
+  rdfs:seeAlso <http://www.w3.org/TR/owl2-rdf-based-semantics/#table-axiomatic-classes>,
+    <http://www.w3.org/TR/owl2-rdf-based-semantics/#table-axiomatic-properties>;
+  owl:imports <http://www.w3.org/2000/01/rdf-schema>;
+  owl:versionIRI <http://www.w3.org/2002/07/owl>;
+  owl:versionInfo "$Date: 2009/11/15 10:54:12 $";
+  grddl:namespaceTransformation <http://dev.w3.org/cvsweb/2009/owl-grddl/owx2rdf.xsl> .
+
+owl:AllDifferent a rdfs:Class;
+  rdfs:comment "The class of collections of pairwise different individuals.";
+  rdfs:isDefinedBy <http://www.w3.org/2002/07/owl#>;
+  rdfs:label "AllDifferent";
+  rdfs:subClassOf rdfs:Resource .
+
+owl:AllDisjointClasses a rdfs:Class;
+  rdfs:comment "The class of collections of pairwise disjoint classes.";
+  rdfs:isDefinedBy <http://www.w3.org/2002/07/owl#>;
+  rdfs:label "AllDisjointClasses";
+  rdfs:subClassOf rdfs:Resource .
+
+owl:AllDisjointProperties a rdfs:Class;
+  rdfs:comment "The class of collections of pairwise disjoint properties.";
+  rdfs:isDefinedBy <http://www.w3.org/2002/07/owl#>;
+  rdfs:label "AllDisjointProperties";
+  rdfs:subClassOf rdfs:Resource .
+
+owl:Annotation a rdfs:Class;
+  rdfs:comment "The class of annotated annotations for which the RDF serialization consists of an annotated subject, predicate and object.";
+  rdfs:isDefinedBy <http://www.w3.org/2002/07/owl#>;
+  rdfs:label "Annotation";
+  rdfs:subClassOf rdfs:Resource .
+
+owl:AnnotationProperty a rdfs:Class;
+  rdfs:comment "The class of annotation properties.";
+  rdfs:isDefinedBy <http://www.w3.org/2002/07/owl#>;
+  rdfs:label "AnnotationProperty";
+  rdfs:subClassOf rdf:Property .
+
+owl:AsymmetricProperty a rdfs:Class;
+  rdfs:comment "The class of asymmetric properties.";
+  rdfs:isDefinedBy <http://www.w3.org/2002/07/owl#>;
+  rdfs:label "AsymmetricProperty";
+  rdfs:subClassOf owl:ObjectProperty .
+
+owl:Axiom a rdfs:Class;
+  rdfs:comment "The class of annotated axioms for which the RDF serialization consists of an annotated subject, predicate and object.";
+  rdfs:isDefinedBy <http://www.w3.org/2002/07/owl#>;
+  rdfs:label "Axiom";
+  rdfs:subClassOf rdfs:Resource .
+
+owl:Class a rdfs:Class;
+  rdfs:comment "The class of OWL classes.";
+  rdfs:isDefinedBy <http://www.w3.org/2002/07/owl#>;
+  rdfs:label "Class";
+  rdfs:subClassOf rdfs:Class .
+
+owl:DataRange a rdfs:Class;
+  rdfs:comment "The class of OWL data ranges, which are special kinds of datatypes. Note: The use of the IRI owl:DataRange has been deprecated as of OWL 2. The IRI rdfs:Datatype SHOULD be used instead.";
+  rdfs:isDefinedBy <http://www.w3.org/2002/07/owl#>;
+  rdfs:label "DataRange";
+  rdfs:subClassOf rdfs:Datatype .
+
+owl:DatatypeProperty a rdfs:Class;
+  rdfs:comment "The class of data properties.";
+  rdfs:isDefinedBy <http://www.w3.org/2002/07/owl#>;
+  rdfs:label "DatatypeProperty";
+  rdfs:subClassOf rdf:Property .
+
+owl:DeprecatedClass a rdfs:Class;
+  rdfs:comment "The class of deprecated classes.";
+  rdfs:isDefinedBy <http://www.w3.org/2002/07/owl#>;
+  rdfs:label "DeprecatedClass";
+  rdfs:subClassOf rdfs:Class .
+
+owl:DeprecatedProperty a rdfs:Class;
+  rdfs:comment "The class of deprecated properties.";
+  rdfs:isDefinedBy <http://www.w3.org/2002/07/owl#>;
+  rdfs:label "DeprecatedProperty";
+  rdfs:subClassOf rdf:Property .
+
+owl:FunctionalProperty a rdfs:Class;
+  rdfs:comment "The class of functional properties.";
+  rdfs:isDefinedBy <http://www.w3.org/2002/07/owl#>;
+  rdfs:label "FunctionalProperty";
+  rdfs:subClassOf rdf:Property .
+
+owl:InverseFunctionalProperty a rdfs:Class;
+  rdfs:comment "The class of inverse-functional properties.";
+  rdfs:isDefinedBy <http://www.w3.org/2002/07/owl#>;
+  rdfs:label "InverseFunctionalProperty";
+  rdfs:subClassOf owl:ObjectProperty .
+
+owl:IrreflexiveProperty a rdfs:Class;
+  rdfs:comment "The class of irreflexive properties.";
+  rdfs:isDefinedBy <http://www.w3.org/2002/07/owl#>;
+  rdfs:label "IrreflexiveProperty";
+  rdfs:subClassOf owl:ObjectProperty .
+
+owl:NamedIndividual a rdfs:Class;
+  rdfs:comment "The class of named individuals.";
+  rdfs:isDefinedBy <http://www.w3.org/2002/07/owl#>;
+  rdfs:label "NamedIndividual";
+  rdfs:subClassOf owl:Thing .
+
+owl:NegativePropertyAssertion a rdfs:Class;
+  rdfs:comment "The class of negative property assertions.";
+  rdfs:isDefinedBy <http://www.w3.org/2002/07/owl#>;
+  rdfs:label "NegativePropertyAssertion";
+  rdfs:subClassOf rdfs:Resource .
+
+owl:Nothing a owl:Class;
+  rdfs:comment "This is the empty class.";
+  rdfs:isDefinedBy <http://www.w3.org/2002/07/owl#>;
+  rdfs:label "Nothing";
+  rdfs:subClassOf owl:Thing .
+
+owl:ObjectProperty a rdfs:Class;
+  rdfs:comment "The class of object properties.";
+  rdfs:isDefinedBy <http://www.w3.org/2002/07/owl#>;
+  rdfs:label "ObjectProperty";
+  rdfs:subClassOf rdf:Property .
+
+owl:Ontology a rdfs:Class;
+  rdfs:comment "The class of ontologies.";
+  rdfs:isDefinedBy <http://www.w3.org/2002/07/owl#>;
+  rdfs:label "Ontology";
+  rdfs:subClassOf rdfs:Resource .
+
+owl:OntologyProperty a rdfs:Class;
+  rdfs:comment "The class of ontology properties.";
+  rdfs:isDefinedBy <http://www.w3.org/2002/07/owl#>;
+  rdfs:label "OntologyProperty";
+  rdfs:subClassOf rdf:Property .
+
+owl:ReflexiveProperty a rdfs:Class;
+  rdfs:comment "The class of reflexive properties.";
+  rdfs:isDefinedBy <http://www.w3.org/2002/07/owl#>;
+  rdfs:label "ReflexiveProperty";
+  rdfs:subClassOf owl:ObjectProperty .
+
+owl:Restriction a rdfs:Class;
+  rdfs:comment "The class of property restrictions.";
+  rdfs:isDefinedBy <http://www.w3.org/2002/07/owl#>;
+  rdfs:label "Restriction";
+  rdfs:subClassOf owl:Class .
+
+owl:SymmetricProperty a rdfs:Class;
+  rdfs:comment "The class of symmetric properties.";
+  rdfs:isDefinedBy <http://www.w3.org/2002/07/owl#>;
+  rdfs:label "SymmetricProperty";
+  rdfs:subClassOf owl:ObjectProperty .
+
+owl:TransitiveProperty a rdfs:Class;
+  rdfs:comment "The class of transitive properties.";
+  rdfs:isDefinedBy <http://www.w3.org/2002/07/owl#>;
+  rdfs:label "TransitiveProperty";
+  rdfs:subClassOf owl:ObjectProperty .
+
+owl:Thing a owl:Class;
+  rdfs:comment "The class of OWL individuals.";
+  rdfs:isDefinedBy <http://www.w3.org/2002/07/owl#>;
+  rdfs:label "Thing" .
+
+owl:allValuesFrom a rdf:Property;
+  rdfs:comment "The property that determines the class that a universal property restriction refers to.";
+  rdfs:domain owl:Restriction;
+  rdfs:isDefinedBy <http://www.w3.org/2002/07/owl#>;
+  rdfs:label "allValuesFrom";
+  rdfs:range rdfs:Class .
+
+owl:annotatedProperty a rdf:Property;
+  rdfs:comment "The property that determines the predicate of an annotated axiom or annotated annotation.";
+  rdfs:domain rdfs:Resource;
+  rdfs:isDefinedBy <http://www.w3.org/2002/07/owl#>;
+  rdfs:label "annotatedProperty";
+  rdfs:range rdfs:Resource .
+
+owl:annotatedSource a rdf:Property;
+  rdfs:comment "The property that determines the subject of an annotated axiom or annotated annotation.";
+  rdfs:domain rdfs:Resource;
+  rdfs:isDefinedBy <http://www.w3.org/2002/07/owl#>;
+  rdfs:label "annotatedSource";
+  rdfs:range rdfs:Resource .
+
+owl:annotatedTarget a rdf:Property;
+  rdfs:comment "The property that determines the object of an annotated axiom or annotated annotation.";
+  rdfs:domain rdfs:Resource;
+  rdfs:isDefinedBy <http://www.w3.org/2002/07/owl#>;
+  rdfs:label "annotatedTarget";
+  rdfs:range rdfs:Resource .
+
+owl:assertionProperty a rdf:Property;
+  rdfs:comment "The property that determines the predicate of a negative property assertion.";
+  rdfs:domain owl:NegativePropertyAssertion;
+  rdfs:isDefinedBy <http://www.w3.org/2002/07/owl#>;
+  rdfs:label "assertionProperty";
+  rdfs:range rdf:Property .
+
+owl:backwardCompatibleWith a owl:AnnotationProperty, owl:OntologyProperty;
+  rdfs:comment "The annotation property that indicates that a given ontology is backward compatible with another ontology.";
+  rdfs:domain owl:Ontology;
+  rdfs:isDefinedBy <http://www.w3.org/2002/07/owl#>;
+  rdfs:label "backwardCompatibleWith";
+  rdfs:range owl:Ontology .
+
+owl:bottomDataProperty a owl:DatatypeProperty;
+  rdfs:comment "The data property that does not relate any individual to any data value.";
+  rdfs:domain owl:Thing;
+  rdfs:isDefinedBy <http://www.w3.org/2002/07/owl#>;
+  rdfs:label "bottomDataProperty";
+  rdfs:range rdfs:Literal .
+
+owl:bottomObjectProperty a owl:ObjectProperty;
+  rdfs:comment "The object property that does not relate any two individuals.";
+  rdfs:domain owl:Thing;
+  rdfs:isDefinedBy <http://www.w3.org/2002/07/owl#>;
+  rdfs:label "bottomObjectProperty";
+  rdfs:range owl:Thing .
+
+owl:cardinality a rdf:Property;
+  rdfs:comment "The property that determines the cardinality of an exact cardinality restriction.";
+  rdfs:domain owl:Restriction;
+  rdfs:isDefinedBy <http://www.w3.org/2002/07/owl#>;
+  rdfs:label "cardinality";
+  rdfs:range xsd:nonNegativeInteger .
+
+owl:complementOf a rdf:Property;
+  rdfs:comment "The property that determines that a given class is the complement of another class.";
+  rdfs:domain owl:Class;
+  rdfs:isDefinedBy <http://www.w3.org/2002/07/owl#>;
+  rdfs:label "complementOf";
+  rdfs:range owl:Class .
+
+owl:datatypeComplementOf a rdf:Property;
+  rdfs:comment "The property that determines that a given data range is the complement of another data range with respect to the data domain.";
+  rdfs:domain rdfs:Datatype;
+  rdfs:isDefinedBy <http://www.w3.org/2002/07/owl#>;
+  rdfs:label "datatypeComplementOf";
+  rdfs:range rdfs:Datatype .
+
+owl:deprecated a owl:AnnotationProperty;
+  rdfs:comment "The annotation property that indicates that a given entity has been deprecated.";
+  rdfs:domain rdfs:Resource;
+  rdfs:isDefinedBy <http://www.w3.org/2002/07/owl#>;
+  rdfs:label "deprecated";
+  rdfs:range rdfs:Resource .
+
+owl:differentFrom a rdf:Property;
+  rdfs:comment "The property that determines that two given individuals are different.";
+  rdfs:domain owl:Thing;
+  rdfs:isDefinedBy <http://www.w3.org/2002/07/owl#>;
+  rdfs:label "differentFrom";
+  rdfs:range owl:Thing .
+
+owl:disjointUnionOf a rdf:Property;
+  rdfs:comment "The property that determines that a given class is equivalent to the disjoint union of a collection of other classes.";
+  rdfs:domain owl:Class;
+  rdfs:isDefinedBy <http://www.w3.org/2002/07/owl#>;
+  rdfs:label "disjointUnionOf";
+  rdfs:range rdf:List .
+
+owl:disjointWith a rdf:Property;
+  rdfs:comment "The property that determines that two given classes are disjoint.";
+  rdfs:domain owl:Class;
+  rdfs:isDefinedBy <http://www.w3.org/2002/07/owl#>;
+  rdfs:label "disjointWith";
+  rdfs:range owl:Class .
+
+owl:distinctMembers a rdf:Property;
+  rdfs:comment "The property that determines the collection of pairwise different individuals in a owl:AllDifferent axiom.";
+  rdfs:domain owl:AllDifferent;
+  rdfs:isDefinedBy <http://www.w3.org/2002/07/owl#>;
+  rdfs:label "distinctMembers";
+  rdfs:range rdf:List .
+
+owl:equivalentClass a rdf:Property;
+  rdfs:comment "The property that determines that two given classes are equivalent, and that is used to specify datatype definitions.";
+  rdfs:domain rdfs:Class;
+  rdfs:isDefinedBy <http://www.w3.org/2002/07/owl#>;
+  rdfs:label "equivalentClass";
+  rdfs:range rdfs:Class .
+
+owl:equivalentProperty a rdf:Property;
+  rdfs:comment "The property that determines that two given properties are equivalent.";
+  rdfs:domain rdf:Property;
+  rdfs:isDefinedBy <http://www.w3.org/2002/07/owl#>;
+  rdfs:label "equivalentProperty";
+  rdfs:range rdf:Property .
+
+owl:hasKey a rdf:Property;
+  rdfs:comment "The property that determines the collection of properties that jointly build a key.";
+  rdfs:domain owl:Class;
+  rdfs:isDefinedBy <http://www.w3.org/2002/07/owl#>;
+  rdfs:label "hasKey";
+  rdfs:range rdf:List .
+
+owl:hasSelf a rdf:Property;
+  rdfs:comment "The property that determines the property that a self restriction refers to.";
+  rdfs:domain owl:Restriction;
+  rdfs:isDefinedBy <http://www.w3.org/2002/07/owl#>;
+  rdfs:label "hasSelf";
+  rdfs:range rdfs:Resource .
+
+owl:hasValue a rdf:Property;
+  rdfs:comment "The property that determines the individual that a has-value restriction refers to.";
+  rdfs:domain owl:Restriction;
+  rdfs:isDefinedBy <http://www.w3.org/2002/07/owl#>;
+  rdfs:label "hasValue";
+  rdfs:range rdfs:Resource .
+
+owl:imports a owl:OntologyProperty;
+  rdfs:comment "The property that is used for importing other ontologies into a given ontology.";
+  rdfs:domain owl:Ontology;
+  rdfs:isDefinedBy <http://www.w3.org/2002/07/owl#>;
+  rdfs:label "imports";
+  rdfs:range owl:Ontology .
+
+owl:incompatibleWith a owl:AnnotationProperty, owl:OntologyProperty;
+  rdfs:comment "The annotation property that indicates that a given ontology is incompatible with another ontology.";
+  rdfs:domain owl:Ontology;
+  rdfs:isDefinedBy <http://www.w3.org/2002/07/owl#>;
+  rdfs:label "incompatibleWith";
+  rdfs:range owl:Ontology .
+
+owl:intersectionOf a rdf:Property;
+  rdfs:comment "The property that determines the collection of classes or data ranges that build an intersection.";
+  rdfs:domain rdfs:Class;
+  rdfs:isDefinedBy <http://www.w3.org/2002/07/owl#>;
+  rdfs:label "intersectionOf";
+  rdfs:range rdf:List .
+
+owl:inverseOf a rdf:Property;
+  rdfs:comment "The property that determines that two given properties are inverse.";
+  rdfs:domain owl:ObjectProperty;
+  rdfs:isDefinedBy <http://www.w3.org/2002/07/owl#>;
+  rdfs:label "inverseOf";
+  rdfs:range owl:ObjectProperty .
+
+owl:maxCardinality a rdf:Property;
+  rdfs:comment "The property that determines the cardinality of a maximum cardinality restriction.";
+  rdfs:domain owl:Restriction;
+  rdfs:isDefinedBy <http://www.w3.org/2002/07/owl#>;
+  rdfs:label "maxCardinality";
+  rdfs:range xsd:nonNegativeInteger .
+
+owl:maxQualifiedCardinality a rdf:Property;
+  rdfs:comment "The property that determines the cardinality of a maximum qualified cardinality restriction.";
+  rdfs:domain owl:Restriction;
+  rdfs:isDefinedBy <http://www.w3.org/2002/07/owl#>;
+  rdfs:label "maxQualifiedCardinality";
+  rdfs:range xsd:nonNegativeInteger .
+
+owl:members a rdf:Property;
+  rdfs:comment "The property that determines the collection of members in either a owl:AllDifferent, owl:AllDisjointClasses or owl:AllDisjointProperties axiom.";
+  rdfs:domain rdfs:Resource;
+  rdfs:isDefinedBy <http://www.w3.org/2002/07/owl#>;
+  rdfs:label "members";
+  rdfs:range rdf:List .
+
+owl:minCardinality a rdf:Property;
+  rdfs:comment "The property that determines the cardinality of a minimum cardinality restriction.";
+  rdfs:domain owl:Restriction;
+  rdfs:isDefinedBy <http://www.w3.org/2002/07/owl#>;
+  rdfs:label "minCardinality";
+  rdfs:range xsd:nonNegativeInteger .
+
+owl:minQualifiedCardinality a rdf:Property;
+  rdfs:comment "The property that determines the cardinality of a minimum qualified cardinality restriction.";
+  rdfs:domain owl:Restriction;
+  rdfs:isDefinedBy <http://www.w3.org/2002/07/owl#>;
+  rdfs:label "minQualifiedCardinality";
+  rdfs:range xsd:nonNegativeInteger .
+
+owl:onClass a rdf:Property;
+  rdfs:comment "The property that determines the class that a qualified object cardinality restriction refers to.";
+  rdfs:domain owl:Restriction;
+  rdfs:isDefinedBy <http://www.w3.org/2002/07/owl#>;
+  rdfs:label "onClass";
+  rdfs:range owl:Class .
+
+owl:onDataRange a rdf:Property;
+  rdfs:comment "The property that determines the data range that a qualified data cardinality restriction refers to.";
+  rdfs:domain owl:Restriction;
+  rdfs:isDefinedBy <http://www.w3.org/2002/07/owl#>;
+  rdfs:label "onDataRange";
+  rdfs:range rdfs:Datatype .
+
+owl:onDatatype a rdf:Property;
+  rdfs:comment "The property that determines the datatype that a datatype restriction refers to.";
+  rdfs:domain rdfs:Datatype;
+  rdfs:isDefinedBy <http://www.w3.org/2002/07/owl#>;
+  rdfs:label "onDatatype";
+  rdfs:range rdfs:Datatype .
+
+owl:oneOf a rdf:Property;
+  rdfs:comment "The property that determines the collection of individuals or data values that build an enumeration.";
+  rdfs:domain rdfs:Class;
+  rdfs:isDefinedBy <http://www.w3.org/2002/07/owl#>;
+  rdfs:label "oneOf";
+  rdfs:range rdf:List .
+
+owl:onProperties a rdf:Property;
+  rdfs:comment "The property that determines the n-tuple of properties that a property restriction on an n-ary data range refers to.";
+  rdfs:domain owl:Restriction;
+  rdfs:isDefinedBy <http://www.w3.org/2002/07/owl#>;
+  rdfs:label "onProperties";
+  rdfs:range rdf:List .
+
+owl:onProperty a rdf:Property;
+  rdfs:comment "The property that determines the property that a property restriction refers to.";
+  rdfs:domain owl:Restriction;
+  rdfs:isDefinedBy <http://www.w3.org/2002/07/owl#>;
+  rdfs:label "onProperty";
+  rdfs:range rdf:Property .
+
+owl:priorVersion a owl:AnnotationProperty, owl:OntologyProperty;
+  rdfs:comment "The annotation property that indicates the predecessor ontology of a given ontology.";
+  rdfs:domain owl:Ontology;
+  rdfs:isDefinedBy <http://www.w3.org/2002/07/owl#>;
+  rdfs:label "priorVersion";
+  rdfs:range owl:Ontology .
+
+owl:propertyChainAxiom a rdf:Property;
+  rdfs:comment "The property that determines the n-tuple of properties that build a sub property chain of a given property.";
+  rdfs:domain owl:ObjectProperty;
+  rdfs:isDefinedBy <http://www.w3.org/2002/07/owl#>;
+  rdfs:label "propertyChainAxiom";
+  rdfs:range rdf:List .
+
+owl:propertyDisjointWith a rdf:Property;
+  rdfs:comment "The property that determines that two given properties are disjoint.";
+  rdfs:domain rdf:Property;
+  rdfs:isDefinedBy <http://www.w3.org/2002/07/owl#>;
+  rdfs:label "propertyDisjointWith";
+  rdfs:range rdf:Property .
+
+owl:qualifiedCardinality a rdf:Property;
+  rdfs:comment "The property that determines the cardinality of an exact qualified cardinality restriction.";
+  rdfs:domain owl:Restriction;
+  rdfs:isDefinedBy <http://www.w3.org/2002/07/owl#>;
+  rdfs:label "qualifiedCardinality";
+  rdfs:range xsd:nonNegativeInteger .
+
+owl:sameAs a rdf:Property;
+  rdfs:comment "The property that determines that two given individuals are equal.";
+  rdfs:domain owl:Thing;
+  rdfs:isDefinedBy <http://www.w3.org/2002/07/owl#>;
+  rdfs:label "sameAs";
+  rdfs:range owl:Thing .
+
+owl:someValuesFrom a rdf:Property;
+  rdfs:comment "The property that determines the class that an existential property restriction refers to.";
+  rdfs:domain owl:Restriction;
+  rdfs:isDefinedBy <http://www.w3.org/2002/07/owl#>;
+  rdfs:label "someValuesFrom";
+  rdfs:range rdfs:Class .
+
+owl:sourceIndividual a rdf:Property;
+  rdfs:comment "The property that determines the subject of a negative property assertion.";
+  rdfs:domain owl:NegativePropertyAssertion;
+  rdfs:isDefinedBy <http://www.w3.org/2002/07/owl#>;
+  rdfs:label "sourceIndividual";
+  rdfs:range owl:Thing .
+
+owl:targetIndividual a rdf:Property;
+  rdfs:comment "The property that determines the object of a negative object property assertion.";
+  rdfs:domain owl:NegativePropertyAssertion;
+  rdfs:isDefinedBy <http://www.w3.org/2002/07/owl#>;
+  rdfs:label "targetIndividual";
+  rdfs:range owl:Thing .
+
+owl:targetValue a rdf:Property;
+  rdfs:comment "The property that determines the value of a negative data property assertion.";
+  rdfs:domain owl:NegativePropertyAssertion;
+  rdfs:isDefinedBy <http://www.w3.org/2002/07/owl#>;
+  rdfs:label "targetValue";
+  rdfs:range rdfs:Literal .
+
+owl:topDataProperty a owl:DatatypeProperty;
+  rdfs:comment "The data property that relates every individual to every data value.";
+  rdfs:domain owl:Thing;
+  rdfs:isDefinedBy <http://www.w3.org/2002/07/owl#>;
+  rdfs:label "topDataProperty";
+  rdfs:range rdfs:Literal .
+
+owl:topObjectProperty a owl:ObjectProperty;
+  rdfs:comment "The object property that relates every two individuals.";
+  rdfs:domain owl:Thing;
+  rdfs:isDefinedBy <http://www.w3.org/2002/07/owl#>;
+  rdfs:label "topObjectProperty";
+  rdfs:range owl:Thing .
+
+owl:unionOf a rdf:Property;
+  rdfs:comment "The property that determines the collection of classes or data ranges that build a union.";
+  rdfs:domain rdfs:Class;
+  rdfs:isDefinedBy <http://www.w3.org/2002/07/owl#>;
+  rdfs:label "unionOf";
+  rdfs:range rdf:List .
+
+owl:versionInfo a owl:AnnotationProperty;
+  rdfs:comment "The annotation property that provides version information for an ontology or another OWL construct.";
+  rdfs:domain rdfs:Resource;
+  rdfs:isDefinedBy <http://www.w3.org/2002/07/owl#>;
+  rdfs:label "versionInfo";
+  rdfs:range rdfs:Resource .
+
+owl:versionIRI a owl:OntologyProperty;
+  rdfs:comment "The property that identifies the version IRI of an ontology.";
+  rdfs:domain owl:Ontology;
+  rdfs:isDefinedBy <http://www.w3.org/2002/07/owl#>;
+  rdfs:label "versionIRI";
+  rdfs:range owl:Ontology .
+
+owl:withRestrictions a rdf:Property;
+  rdfs:comment "The property that determines the collection of facet-value pairs that define a datatype restriction.";
+  rdfs:domain rdfs:Datatype;
+  rdfs:isDefinedBy <http://www.w3.org/2002/07/owl#>;
+  rdfs:label "withRestrictions";
+  rdfs:range rdf:List .
+
+<http://xmlns.com/foaf/0.1/> a owl:Ontology;
+  dc:description "The Friend of a Friend (FOAF) RDF vocabulary, described using W3C RDF Schema and the Web Ontology Language.";
+  dc:title "Friend of a Friend (FOAF) vocabulary" .
+
+wot:assurance a owl:AnnotationProperty .
+
+wot:src_assurance a owl:AnnotationProperty .
+
+vs:term_status a owl:AnnotationProperty .
+
+dc:description a owl:AnnotationProperty .
+
+dc:title a owl:AnnotationProperty .
+
+dc:date a owl:AnnotationProperty .
+
+rdfs:Class a owl:Class .
+
+foaf:LabelProperty a rdfs:Class, owl:Class;
+  rdfs:comment "A foaf:LabelProperty is any RDF property with texual values that serve as labels.";
+  rdfs:isDefinedBy <http://xmlns.com/foaf/0.1/>;
+  rdfs:label "Label Property";
+  vs:term_status "unstable" .
+
+foaf:Person a rdfs:Class, owl:Class;
+  rdfs:comment "A person.";
+  rdfs:isDefinedBy <http://xmlns.com/foaf/0.1/>;
+  rdfs:label "Person";
+  rdfs:subClassOf <http://www.w3.org/2003/01/geo/wgs84_pos#SpatialThing>, foaf:Agent;
+  owl:disjointWith foaf:Organization, foaf:Project;
+  owl:equivalentClass <http://schema.org/Person>, <http://www.w3.org/2000/10/swap/pim/contact#Person>;
+  vs:term_status "stable" .
+
+foaf:Agent a rdfs:Class, owl:Class;
+  rdfs:comment "An agent (eg. person, group, software or physical artifact).";
+  rdfs:label "Agent";
+  owl:equivalentClass <http://purl.org/dc/terms/Agent>;
+  vs:term_status "stable" .
+
+<http://www.w3.org/2003/01/geo/wgs84_pos#SpatialThing> a owl:Class;
+  rdfs:label "Spatial Thing" .
+
+foaf:Document a rdfs:Class, owl:Class;
+  rdfs:comment "A document.";
+  rdfs:isDefinedBy <http://xmlns.com/foaf/0.1/>;
+  rdfs:label "Document";
+  owl:disjointWith foaf:Organization, foaf:Project;
+  owl:equivalentClass <http://schema.org/CreativeWork>;
+  vs:term_status "stable" .
+
+foaf:Organization a rdfs:Class, owl:Class;
+  rdfs:comment "An organization.";
+  rdfs:isDefinedBy <http://xmlns.com/foaf/0.1/>;
+  rdfs:label "Organization";
+  rdfs:subClassOf foaf:Agent;
+  owl:disjointWith foaf:Document, foaf:Person;
+  vs:term_status "stable" .
+
+foaf:Group a rdfs:Class, owl:Class;
+  rdfs:comment "A class of Agents.";
+  rdfs:label "Group";
+  rdfs:subClassOf foaf:Agent;
+  vs:term_status "stable" .
+
+foaf:Project a rdfs:Class, owl:Class;
+  rdfs:comment "A project (a collective endeavour of some kind).";
+  rdfs:isDefinedBy <http://xmlns.com/foaf/0.1/>;
+  rdfs:label "Project";
+  owl:disjointWith foaf:Document, foaf:Person;
+  vs:term_status "testing" .
+
+foaf:Image a rdfs:Class, owl:Class;
+  rdfs:comment "An image.";
+  rdfs:isDefinedBy <http://xmlns.com/foaf/0.1/>;
+  rdfs:label "Image";
+  rdfs:subClassOf foaf:Document;
+  owl:equivalentClass <http://schema.org/ImageObject>;
+  vs:term_status "stable" .
+
+foaf:PersonalProfileDocument a rdfs:Class, owl:Class;
+  rdfs:comment "A personal profile RDF document.";
+  rdfs:label "PersonalProfileDocument";
+  rdfs:subClassOf foaf:Document;
+  vs:term_status "testing" .
+
+foaf:OnlineAccount a rdfs:Class, owl:Class;
+  rdfs:comment "An online account.";
+  rdfs:isDefinedBy <http://xmlns.com/foaf/0.1/>;
+  rdfs:label "Online Account";
+  rdfs:subClassOf owl:Thing;
+  vs:term_status "testing" .
+
+foaf:OnlineGamingAccount a rdfs:Class, owl:Class;
+  rdfs:comment "An online gaming account.";
+  rdfs:isDefinedBy <http://xmlns.com/foaf/0.1/>;
+  rdfs:label "Online Gaming Account";
+  rdfs:subClassOf foaf:OnlineAccount;
+  vs:term_status "unstable" .
+
+foaf:OnlineEcommerceAccount a rdfs:Class, owl:Class;
+  rdfs:comment "An online e-commerce account.";
+  rdfs:isDefinedBy <http://xmlns.com/foaf/0.1/>;
+  rdfs:label "Online E-commerce Account";
+  rdfs:subClassOf foaf:OnlineAccount;
+  vs:term_status "unstable" .
+
+foaf:OnlineChatAccount a rdfs:Class, owl:Class;
+  rdfs:comment "An online chat account.";
+  rdfs:isDefinedBy <http://xmlns.com/foaf/0.1/>;
+  rdfs:label "Online Chat Account";
+  rdfs:subClassOf foaf:OnlineAccount;
+  vs:term_status "unstable" .
+
+foaf:mbox a rdf:Property, owl:InverseFunctionalProperty, owl:ObjectProperty;
+  rdfs:comment "A  personal mailbox, ie. an Internet mailbox associated with exactly one owner, the first owner of this mailbox. This is a 'static inverse functional property', in that  there is (across time and change) at most one individual that ever has any particular value for foaf:mbox.";
+  rdfs:domain foaf:Agent;
+  rdfs:isDefinedBy <http://xmlns.com/foaf/0.1/>;
+  rdfs:label "personal mailbox";
+  rdfs:range owl:Thing;
+  vs:term_status "stable" .
+
+foaf:mbox_sha1sum a rdf:Property, owl:DatatypeProperty, owl:InverseFunctionalProperty;
+  rdfs:comment "The sha1sum of the URI of an Internet mailbox associated with exactly one owner, the  first owner of the mailbox.";
+  rdfs:domain foaf:Agent;
+  rdfs:isDefinedBy <http://xmlns.com/foaf/0.1/>;
+  rdfs:label "sha1sum of a personal mailbox URI name";
+  rdfs:range rdfs:Literal;
+  vs:term_status "testing" .
+
+foaf:gender a rdf:Property, owl:DatatypeProperty, owl:FunctionalProperty;
+  rdfs:comment "The gender of this Agent (typically but not necessarily 'male' or 'female').";
+  rdfs:domain foaf:Agent;
+  rdfs:isDefinedBy <http://xmlns.com/foaf/0.1/>;
+  rdfs:label "gender";
+  rdfs:range rdfs:Literal;
+  vs:term_status "testing" .
+
+foaf:geekcode a rdf:Property, owl:DatatypeProperty;
+  rdfs:comment "A textual geekcode for this person, see http://www.geekcode.com/geek.html";
+  rdfs:domain foaf:Person;
+  rdfs:isDefinedBy <http://xmlns.com/foaf/0.1/>;
+  rdfs:label "geekcode";
+  rdfs:range rdfs:Literal;
+  vs:term_status "archaic" .
+
+foaf:dnaChecksum a rdf:Property, owl:DatatypeProperty;
+  rdfs:comment "A checksum for the DNA of some thing. Joke.";
+  rdfs:isDefinedBy <http://xmlns.com/foaf/0.1/>;
+  rdfs:label "DNA checksum";
+  rdfs:range rdfs:Literal;
+  vs:term_status "archaic" .
+
+foaf:sha1 a rdf:Property, owl:DatatypeProperty;
+  rdfs:comment "A sha1sum hash, in hex.";
+  rdfs:domain foaf:Document;
+  rdfs:isDefinedBy <http://xmlns.com/foaf/0.1/>;
+  rdfs:label "sha1sum (hex)";
+  vs:term_status "unstable" .
+
+foaf:based_near a rdf:Property, owl:ObjectProperty;
+  rdfs:comment "A location that something is based near, for some broadly human notion of near.";
+  rdfs:domain <http://www.w3.org/2003/01/geo/wgs84_pos#SpatialThing>;
+  rdfs:isDefinedBy <http://xmlns.com/foaf/0.1/>;
+  rdfs:label "based near";
+  rdfs:range <http://www.w3.org/2003/01/geo/wgs84_pos#SpatialThing>;
+  vs:term_status "testing" .
+
+foaf:title a rdf:Property, owl:DatatypeProperty;
+  rdfs:comment "Title (Mr, Mrs, Ms, Dr. etc)";
+  rdfs:isDefinedBy <http://xmlns.com/foaf/0.1/>;
+  rdfs:label "title";
+  vs:term_status "testing" .
+
+foaf:nick a rdf:Property, owl:DatatypeProperty;
+  rdfs:comment "A short informal nickname characterising an agent (includes login identifiers, IRC and other chat nicknames).";
+  rdfs:isDefinedBy <http://xmlns.com/foaf/0.1/>;
+  rdfs:label "nickname";
+  vs:term_status "testing" .
+
+foaf:jabberID a rdf:Property, owl:DatatypeProperty, owl:InverseFunctionalProperty;
+  rdfs:comment "A jabber ID for something.";
+  rdfs:domain foaf:Agent;
+  rdfs:isDefinedBy <http://xmlns.com/foaf/0.1/>;
+  rdfs:label "jabber ID";
+  rdfs:range rdfs:Literal;
+  vs:term_status "testing" .
+
+foaf:aimChatID a rdf:Property, owl:DatatypeProperty, owl:InverseFunctionalProperty;
+  rdfs:comment "An AIM chat ID";
+  rdfs:domain foaf:Agent;
+  rdfs:isDefinedBy <http://xmlns.com/foaf/0.1/>;
+  rdfs:label "AIM chat ID";
+  rdfs:range rdfs:Literal;
+  rdfs:subPropertyOf foaf:nick;
+  vs:term_status "testing" .
+
+foaf:skypeID a rdf:Property, owl:DatatypeProperty;
+  rdfs:comment "A Skype ID";
+  rdfs:domain foaf:Agent;
+  rdfs:isDefinedBy <http://xmlns.com/foaf/0.1/>;
+  rdfs:label "Skype ID";
+  rdfs:range rdfs:Literal;
+  rdfs:subPropertyOf foaf:nick;
+  vs:term_status "testing" .
+
+foaf:icqChatID a rdf:Property, owl:DatatypeProperty, owl:InverseFunctionalProperty;
+  rdfs:comment "An ICQ chat ID";
+  rdfs:domain foaf:Agent;
+  rdfs:isDefinedBy <http://xmlns.com/foaf/0.1/>;
+  rdfs:label "ICQ chat ID";
+  rdfs:range rdfs:Literal;
+  rdfs:subPropertyOf foaf:nick;
+  vs:term_status "testing" .
+
+foaf:yahooChatID a rdf:Property, owl:DatatypeProperty, owl:InverseFunctionalProperty;
+  rdfs:comment "A Yahoo chat ID";
+  rdfs:domain foaf:Agent;
+  rdfs:isDefinedBy <http://xmlns.com/foaf/0.1/>;
+  rdfs:label "Yahoo chat ID";
+  rdfs:range rdfs:Literal;
+  rdfs:subPropertyOf foaf:nick;
+  vs:term_status "testing" .
+
+foaf:msnChatID a rdf:Property, owl:DatatypeProperty, owl:InverseFunctionalProperty;
+  rdfs:comment "An MSN chat ID";
+  rdfs:domain foaf:Agent;
+  rdfs:isDefinedBy <http://xmlns.com/foaf/0.1/>;
+  rdfs:label "MSN chat ID";
+  rdfs:range rdfs:Literal;
+  rdfs:subPropertyOf foaf:nick;
+  vs:term_status "testing" .
+
+foaf:name a rdf:Property, owl:DatatypeProperty;
+  rdfs:comment "A name for some thing.";
+  rdfs:domain owl:Thing;
+  rdfs:isDefinedBy <http://xmlns.com/foaf/0.1/>;
+  rdfs:label "name";
+  rdfs:range rdfs:Literal;
+  rdfs:subPropertyOf rdfs:label;
+  vs:term_status "testing" .
+
+foaf:firstName a rdf:Property, owl:DatatypeProperty;
+  rdfs:comment "The first name of a person.";
+  rdfs:domain foaf:Person;
+  rdfs:isDefinedBy <http://xmlns.com/foaf/0.1/>;
+  rdfs:label "firstName";
+  rdfs:range rdfs:Literal;
+  vs:term_status "testing" .
+
+foaf:lastName a rdf:Property, owl:DatatypeProperty;
+  rdfs:comment "The last name of a person.";
+  rdfs:domain foaf:Person;
+  rdfs:isDefinedBy <http://xmlns.com/foaf/0.1/>;
+  rdfs:label "lastName";
+  rdfs:range rdfs:Literal;
+  vs:term_status "testing" .
+
+foaf:givenName a rdf:Property, owl:DatatypeProperty;
+  rdfs:comment "The given name of some person.";
+  rdfs:isDefinedBy <http://xmlns.com/foaf/0.1/>;
+  rdfs:label "Given name";
+  vs:term_status "testing" .
+
+foaf:givenname a rdf:Property, owl:DatatypeProperty;
+  rdfs:comment "The given name of some person.";
+  rdfs:isDefinedBy <http://xmlns.com/foaf/0.1/>;
+  rdfs:label "Given name";
+  vs:term_status "archaic" .
+
+foaf:surname a rdf:Property, owl:DatatypeProperty;
+  rdfs:comment "The surname of some person.";
+  rdfs:domain foaf:Person;
+  rdfs:isDefinedBy <http://xmlns.com/foaf/0.1/>;
+  rdfs:label "Surname";
+  rdfs:range rdfs:Literal;
+  vs:term_status "archaic" .
+
+foaf:family_name a rdf:Property, owl:DatatypeProperty;
+  rdfs:comment "The family name of some person.";
+  rdfs:domain foaf:Person;
+  rdfs:isDefinedBy <http://xmlns.com/foaf/0.1/>;
+  rdfs:label "family_name";
+  rdfs:range rdfs:Literal;
+  vs:term_status "archaic" .
+
+foaf:familyName a rdf:Property, owl:DatatypeProperty;
+  rdfs:comment "The family name of some person.";
+  rdfs:domain foaf:Person;
+  rdfs:isDefinedBy <http://xmlns.com/foaf/0.1/>;
+  rdfs:label "familyName";
+  rdfs:range rdfs:Literal;
+  vs:term_status "testing" .
+
+foaf:phone a rdf:Property, owl:ObjectProperty;
+  rdfs:comment "A phone,  specified using fully qualified tel: URI scheme (refs: http://www.w3.org/Addressing/schemes.html#tel).";
+  rdfs:isDefinedBy <http://xmlns.com/foaf/0.1/>;
+  rdfs:label "phone";
+  vs:term_status "testing" .
+
+foaf:homepage a rdf:Property, owl:InverseFunctionalProperty, owl:ObjectProperty;
+  rdfs:comment "A homepage for some thing.";
+  rdfs:domain owl:Thing;
+  rdfs:isDefinedBy <http://xmlns.com/foaf/0.1/>;
+  rdfs:label "homepage";
+  rdfs:range foaf:Document;
+  rdfs:subPropertyOf foaf:isPrimaryTopicOf, foaf:page;
+  vs:term_status "stable" .
+
+foaf:weblog a rdf:Property, owl:InverseFunctionalProperty, owl:ObjectProperty;
+  rdfs:comment "A weblog of some thing (whether person, group, company etc.).";
+  rdfs:domain foaf:Agent;
+  rdfs:isDefinedBy <http://xmlns.com/foaf/0.1/>;
+  rdfs:label "weblog";
+  rdfs:range foaf:Document;
+  rdfs:subPropertyOf foaf:page;
+  vs:term_status "stable" .
+
+foaf:openid a rdf:Property, owl:InverseFunctionalProperty, owl:ObjectProperty;
+  rdfs:comment "An OpenID for an Agent.";
+  rdfs:domain foaf:Agent;
+  rdfs:isDefinedBy <http://xmlns.com/foaf/0.1/>;
+  rdfs:label "openid";
+  rdfs:range foaf:Document;
+  rdfs:subPropertyOf foaf:isPrimaryTopicOf;
+  vs:term_status "testing" .
+
+foaf:tipjar a rdf:Property, owl:ObjectProperty;
+  rdfs:comment "A tipjar document for this agent, describing means for payment and reward.";
+  rdfs:domain foaf:Agent;
+  rdfs:isDefinedBy <http://xmlns.com/foaf/0.1/>;
+  rdfs:label "tipjar";
+  rdfs:range foaf:Document;
+  rdfs:subPropertyOf foaf:page;
+  vs:term_status "testing" .
+
+foaf:plan a rdf:Property, owl:DatatypeProperty;
+  rdfs:comment "A .plan comment, in the tradition of finger and '.plan' files.";
+  rdfs:domain foaf:Person;
+  rdfs:isDefinedBy <http://xmlns.com/foaf/0.1/>;
+  rdfs:label "plan";
+  rdfs:range rdfs:Literal;
+  vs:term_status "testing" .
+
+foaf:made a rdf:Property, owl:ObjectProperty;
+  rdfs:comment "Something that was made by this agent.";
+  rdfs:domain foaf:Agent;
+  rdfs:isDefinedBy <http://xmlns.com/foaf/0.1/>;
+  rdfs:label "made";
+  rdfs:range owl:Thing;
+  owl:inverseOf foaf:maker;
+  vs:term_status "stable" .
+
+foaf:maker a rdf:Property, owl:ObjectProperty;
+  rdfs:comment "An agent that  made this thing.";
+  rdfs:domain owl:Thing;
+  rdfs:isDefinedBy <http://xmlns.com/foaf/0.1/>;
+  rdfs:label "maker";
+  rdfs:range foaf:Agent;
+  owl:equivalentProperty <http://purl.org/dc/terms/creator>;
+  owl:inverseOf foaf:made;
+  vs:term_status "stable" .
+
+foaf:img a rdf:Property, owl:ObjectProperty;
+  rdfs:comment "An image that can be used to represent some thing (ie. those depictions which are particularly representative of something, eg. one's photo on a homepage).";
+  rdfs:domain foaf:Person;
+  rdfs:isDefinedBy <http://xmlns.com/foaf/0.1/>;
+  rdfs:label "image";
+  rdfs:range foaf:Image;
+  rdfs:subPropertyOf foaf:depiction;
+  vs:term_status "testing" .
+
+foaf:depiction a rdf:Property, owl:ObjectProperty;
+  rdfs:comment "A depiction of some thing.";
+  rdfs:domain owl:Thing;
+  rdfs:isDefinedBy <http://xmlns.com/foaf/0.1/>;
+  rdfs:label "depiction";
+  rdfs:range foaf:Image;
+  owl:inverseOf foaf:depicts;
+  vs:term_status "testing" .
+
+foaf:depicts a rdf:Property, owl:ObjectProperty;
+  rdfs:comment "A thing depicted in this representation.";
+  rdfs:domain foaf:Image;
+  rdfs:isDefinedBy <http://xmlns.com/foaf/0.1/>;
+  rdfs:label "depicts";
+  rdfs:range owl:Thing;
+  owl:inverseOf foaf:depiction;
+  vs:term_status "testing" .
+
+foaf:thumbnail a rdf:Property, owl:ObjectProperty;
+  rdfs:comment "A derived thumbnail image.";
+  rdfs:domain foaf:Image;
+  rdfs:isDefinedBy <http://xmlns.com/foaf/0.1/>;
+  rdfs:label "thumbnail";
+  rdfs:range foaf:Image;
+  vs:term_status "testing" .
+
+foaf:myersBriggs a rdf:Property, owl:DatatypeProperty;
+  rdfs:comment "A Myers Briggs (MBTI) personality classification.";
+  rdfs:domain foaf:Person;
+  rdfs:isDefinedBy <http://xmlns.com/foaf/0.1/>;
+  rdfs:label "myersBriggs";
+  rdfs:range rdfs:Literal;
+  vs:term_status "testing" .
+
+foaf:workplaceHomepage a rdf:Property, owl:ObjectProperty;
+  rdfs:comment "A workplace homepage of some person; the homepage of an organization they work for.";
+  rdfs:domain foaf:Person;
+  rdfs:isDefinedBy <http://xmlns.com/foaf/0.1/>;
+  rdfs:label "workplace homepage";
+  rdfs:range foaf:Document;
+  vs:term_status "testing" .
+
+foaf:workInfoHomepage a rdf:Property, owl:ObjectProperty;
+  rdfs:comment "A work info homepage of some person; a page about their work for some organization.";
+  rdfs:domain foaf:Person;
+  rdfs:isDefinedBy <http://xmlns.com/foaf/0.1/>;
+  rdfs:label "work info homepage";
+  rdfs:range foaf:Document;
+  vs:term_status "testing" .
+
+foaf:schoolHomepage a rdf:Property, owl:ObjectProperty;
+  rdfs:comment "A homepage of a school attended by the person.";
+  rdfs:domain foaf:Person;
+  rdfs:isDefinedBy <http://xmlns.com/foaf/0.1/>;
+  rdfs:label "schoolHomepage";
+  rdfs:range foaf:Document;
+  vs:term_status "testing" .
+
+foaf:knows a rdf:Property, owl:ObjectProperty;
+  rdfs:comment "A person known by this person (indicating some level of reciprocated interaction between the parties).";
+  rdfs:domain foaf:Person;
+  rdfs:isDefinedBy <http://xmlns.com/foaf/0.1/>;
+  rdfs:label "knows";
+  rdfs:range foaf:Person;
+  vs:term_status "stable" .
+
+foaf:interest a rdf:Property, owl:ObjectProperty;
+  rdfs:comment "A page about a topic of interest to this person.";
+  rdfs:domain foaf:Agent;
+  rdfs:isDefinedBy <http://xmlns.com/foaf/0.1/>;
+  rdfs:label "interest";
+  rdfs:range foaf:Document;
+  vs:term_status "testing" .
+
+foaf:topic_interest a rdf:Property, owl:ObjectProperty;
+  rdfs:comment "A thing of interest to this person.";
+  rdfs:domain foaf:Agent;
+  rdfs:isDefinedBy <http://xmlns.com/foaf/0.1/>;
+  rdfs:label "topic_interest";
+  rdfs:range owl:Thing;
+  vs:term_status "testing" .
+
+foaf:publications a rdf:Property, owl:ObjectProperty;
+  rdfs:comment "A link to the publications of this person.";
+  rdfs:domain foaf:Person;
+  rdfs:isDefinedBy <http://xmlns.com/foaf/0.1/>;
+  rdfs:label "publications";
+  rdfs:range foaf:Document;
+  vs:term_status "testing" .
+
+foaf:currentProject a rdf:Property, owl:ObjectProperty;
+  rdfs:comment "A current project this person works on.";
+  rdfs:domain foaf:Person;
+  rdfs:isDefinedBy <http://xmlns.com/foaf/0.1/>;
+  rdfs:label "current project";
+  rdfs:range owl:Thing;
+  vs:term_status "testing" .
+
+foaf:pastProject a rdf:Property, owl:ObjectProperty;
+  rdfs:comment "A project this person has previously worked on.";
+  rdfs:domain foaf:Person;
+  rdfs:isDefinedBy <http://xmlns.com/foaf/0.1/>;
+  rdfs:label "past project";
+  rdfs:range owl:Thing;
+  vs:term_status "testing" .
+
+foaf:fundedBy a rdf:Property, owl:ObjectProperty;
+  rdfs:comment "An organization funding a project or person.";
+  rdfs:domain owl:Thing;
+  rdfs:isDefinedBy <http://xmlns.com/foaf/0.1/>;
+  rdfs:label "funded by";
+  rdfs:range owl:Thing;
+  vs:term_status "archaic" .
+
+foaf:logo a rdf:Property, owl:InverseFunctionalProperty, owl:ObjectProperty;
+  rdfs:comment "A logo representing some thing.";
+  rdfs:domain owl:Thing;
+  rdfs:isDefinedBy <http://xmlns.com/foaf/0.1/>;
+  rdfs:label "logo";
+  rdfs:range owl:Thing;
+  vs:term_status "testing" .
+
+foaf:topic a rdf:Property, owl:ObjectProperty;
+  rdfs:comment "A topic of some page or document.";
+  rdfs:domain foaf:Document;
+  rdfs:isDefinedBy <http://xmlns.com/foaf/0.1/>;
+  rdfs:label "topic";
+  rdfs:range owl:Thing;
+  owl:inverseOf foaf:page;
+  vs:term_status "testing" .
+
+foaf:primaryTopic a rdf:Property, owl:FunctionalProperty, owl:ObjectProperty;
+  rdfs:comment "The primary topic of some page or document.";
+  rdfs:domain foaf:Document;
+  rdfs:isDefinedBy <http://xmlns.com/foaf/0.1/>;
+  rdfs:label "primary topic";
+  rdfs:range owl:Thing;
+  owl:inverseOf foaf:isPrimaryTopicOf;
+  vs:term_status "stable" .
+
+foaf:focus a rdf:Property, owl:ObjectProperty;
+  rdfs:comment "The underlying or 'focal' entity associated with some SKOS-described concept.";
+  rdfs:domain <http://www.w3.org/2004/02/skos/core#Concept>;
+  rdfs:isDefinedBy <http://xmlns.com/foaf/0.1/>;
+  rdfs:label "focus";
+  rdfs:range owl:Thing;
+  vs:term_status "testing" .
+
+<http://www.w3.org/2004/02/skos/core#Concept> rdfs:label "Concept" .
+
+foaf:isPrimaryTopicOf a rdf:Property, owl:InverseFunctionalProperty;
+  rdfs:comment "A document that this thing is the primary topic of.";
+  rdfs:domain owl:Thing;
+  rdfs:isDefinedBy <http://xmlns.com/foaf/0.1/>;
+  rdfs:label "is primary topic of";
+  rdfs:range foaf:Document;
+  rdfs:subPropertyOf foaf:page;
+  owl:inverseOf foaf:primaryTopic;
+  vs:term_status "stable" .
+
+foaf:page a rdf:Property, owl:ObjectProperty;
+  rdfs:comment "A page or document about this thing.";
+  rdfs:domain owl:Thing;
+  rdfs:isDefinedBy <http://xmlns.com/foaf/0.1/>;
+  rdfs:label "page";
+  rdfs:range foaf:Document;
+  owl:inverseOf foaf:topic;
+  vs:term_status "stable" .
+
+foaf:theme a rdf:Property, owl:ObjectProperty;
+  rdfs:comment "A theme.";
+  rdfs:domain owl:Thing;
+  rdfs:isDefinedBy <http://xmlns.com/foaf/0.1/>;
+  rdfs:label "theme";
+  rdfs:range owl:Thing;
+  vs:term_status "archaic" .
+
+foaf:account a rdf:Property, owl:ObjectProperty;
+  rdfs:comment "Indicates an account held by this agent.";
+  rdfs:domain foaf:Agent;
+  rdfs:isDefinedBy <http://xmlns.com/foaf/0.1/>;
+  rdfs:label "account";
+  rdfs:range foaf:OnlineAccount;
+  vs:term_status "testing" .
+
+foaf:holdsAccount a rdf:Property, owl:ObjectProperty;
+  rdfs:comment "Indicates an account held by this agent.";
+  rdfs:domain foaf:Agent;
+  rdfs:isDefinedBy <http://xmlns.com/foaf/0.1/>;
+  rdfs:label "account";
+  rdfs:range foaf:OnlineAccount;
+  vs:term_status "archaic" .
+
+foaf:accountServiceHomepage a rdf:Property, owl:ObjectProperty;
+  rdfs:comment "Indicates a homepage of the service provide for this online account.";
+  rdfs:domain foaf:OnlineAccount;
+  rdfs:isDefinedBy <http://xmlns.com/foaf/0.1/>;
+  rdfs:label "account service homepage";
+  rdfs:range foaf:Document;
+  vs:term_status "testing" .
+
+foaf:accountName a rdf:Property, owl:DatatypeProperty;
+  rdfs:comment "Indicates the name (identifier) associated with this online account.";
+  rdfs:domain foaf:OnlineAccount;
+  rdfs:isDefinedBy <http://xmlns.com/foaf/0.1/>;
+  rdfs:label "account name";
+  rdfs:range rdfs:Literal;
+  vs:term_status "testing" .
+
+foaf:member a rdf:Property, owl:ObjectProperty;
+  rdfs:comment "Indicates a member of a Group";
+  rdfs:domain foaf:Group;
+  rdfs:isDefinedBy <http://xmlns.com/foaf/0.1/>;
+  rdfs:label "member";
+  rdfs:range foaf:Agent;
+  vs:term_status "stable" .
+
+foaf:membershipClass a rdf:Property, owl:AnnotationProperty;
+  rdfs:comment "Indicates the class of individuals that are a member of a Group";
+  rdfs:isDefinedBy <http://xmlns.com/foaf/0.1/>;
+  rdfs:label "membershipClass";
+  vs:term_status "unstable" .
+
+foaf:birthday a rdf:Property, owl:DatatypeProperty, owl:FunctionalProperty;
+  rdfs:comment "The birthday of this Agent, represented in mm-dd string form, eg. '12-31'.";
+  rdfs:domain foaf:Agent;
+  rdfs:isDefinedBy <http://xmlns.com/foaf/0.1/>;
+  rdfs:label "birthday";
+  rdfs:range rdfs:Literal;
+  vs:term_status "unstable" .
+
+foaf:age a rdf:Property, owl:DatatypeProperty, owl:FunctionalProperty;
+  rdfs:comment "The age in years of some agent.";
+  rdfs:domain foaf:Agent;
+  rdfs:isDefinedBy <http://xmlns.com/foaf/0.1/>;
+  rdfs:label "age";
+  rdfs:range rdfs:Literal;
+  vs:term_status "unstable" .
+
+foaf:status a rdf:Property, owl:DatatypeProperty;
+  rdfs:comment "A string expressing what the user is happy for the general public (normally) to know about their current activity.";
+  rdfs:domain foaf:Agent;
+  rdfs:isDefinedBy <http://xmlns.com/foaf/0.1/>;
+  rdfs:label "status";
+  rdfs:range rdfs:Literal;
+  vs:term_status "unstable" .

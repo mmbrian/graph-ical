@@ -1,0 +1,32 @@
+.markdown_container {
+    .markdown_content {
+        position: absolute;
+        top: 30px;
+        height: calc(100% - 30px);
+        width: 100%;
+        textarea.markdown_input {
+            width: calc(100% - 14px);
+            height: calc(100% - 14px);
+            margin: 0;
+            padding: 7px;
+        }
+
+        button.preview-toggle {
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: auto;
+            border: 1px solid black !important;
+            &.invisible {
+              visibility: hidden;
+            }
+        }
+
+        div.markdown_output {
+            width: calc(100% - 14px);
+            height: calc(100% - 14px);
+            padding: 7px;
+            margin: 0;
+        }
+    }
+}

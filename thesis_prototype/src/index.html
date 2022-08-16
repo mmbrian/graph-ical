@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="utf-8">
+    <title>Graph-ical</title>
+    <script src="./public/jquery-3.5.1.min.js">
+    </script>
+</head>
+<body class="hx-sidebar-page move_cursor">
+    <div class="overlay-container">
+    </div>
+    <div class="hx-heading page-heading">
+        <div class="hx-titlebar">
+            <div class="hx-titlebar-container">
+                <div class="hx-titlebar-header page-titlebar">
+                    <!-- <a class="hx-titlebar-icon" href="#"><div class="rdfvis-logo"></div></a>
+                    <span>powered by</span> -->
+                    <div class="hx-titlebar-title">Graph-ical</div>
+                    <div class="hx-titlebar-subtitle">v0.9</div>
+                    <div class="hx-titlebar-menu-icon-mobile"><i class="fa fa-reorder"></i></div>
+                </div>
+                <div class="hx-titlebar-menu-icons">
+                    <!-- <div class="hx-titlebar-menu-content">
+                        <div class="hx-input-group">
+                        <input type="text" id="search_input" value="" placeholder="Search...">
+                        <button class="hx-btn hx-positive"><i class="fa fa-search"></i></button>
+                        </div>
+                    </div> -->
+                    <!-- TODO: some control are made invisible for the study -->
+                    <div class="hx-titlebar-menu-icons-container">
+                        <button type="button" id="btn_domain_expert_toggle" class="hx-btn">
+                          Expert Mode
+                        </button>
+                        <a id="create-events" class="hx-titlebar-menu-icon"><i class="fa fa-cog"></i><span class="hx-titlebar-menu-text">Create Events</span></a>
+                        <a id="translate-rdf-terms" class="hx-titlebar-menu-icon"><i class="fa fa-language"></i><span class="hx-titlebar-menu-text">Translate RDF Terms</span></a>
+                        <a id="select-repository" class="hx-titlebar-menu-icon"><i class="fa fa-database"></i><span class="hx-titlebar-menu-text">Select Repository</span></a>
+                        <a id="persona-manager" class="hx-titlebar-menu-icon"><i class="fa fa-person-booth"></i><span class="hx-titlebar-menu-text">Persona Manager</span></a>
+                        <a id="tab-manager-toggle" class="hx-titlebar-menu-icon"><i class="fa fa-window-restore"></i><span class="hx-titlebar-menu-text">Tab Manager</span></a>
+                        <a id="add-ui" class="hx-titlebar-menu-icon">
+                            <i class="fas fa-plus"></i>
+                            <span class="hx-titlebar-menu-text">Add Visualization</span>
+                        </a>
+                        <a id="store" class="hx-titlebar-menu-icon invisible"><i class="fa fa-cloud-upload-alt"></i><span class="hx-titlebar-menu-text">Store In Repository</span></a>
+                        <a id="load" class="hx-titlebar-menu-icon invisible"><i class="fa fa-cloud-download-alt"></i><span class="hx-titlebar-menu-text">Import Repository</span></a>
+                        <a id="import-ttl-button" class="hx-titlebar-menu-icon invisible"><i class="fa fa-upload"></i><span class="hx-titlebar-menu-text">Import TTL</span></a>
+
+                        <a id="import-template-button" class="hx-titlebar-menu-icon"><i class="fa fa-file-import"></i><span class="hx-titlebar-menu-text">Import Template TTL</span></a>
+                        <a id="export-template-button" class="hx-titlebar-menu-icon"><i class="fa fa-file-export"></i><span class="hx-titlebar-menu-text">Export Template TTL</span></a>
+
+                        <a id="legend-toggle" class="hx-titlebar-menu-icon invisible"><i class="fa fa-info-circle"></i><span class="hx-titlebar-menu-text">Visualization Legend</span></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="legendSidebar" class="legend-sidebar" disabled="disabled">
+        <div class="hx-side-collapsible-heading-closed">See Template Information</div>
+        <div class="hx-side-collapsible-heading-open">
+            Template Description (Legend)
+        </div>
+        <div class="hx-side-collapsible-content">
+            <div id="legend-area" class="legend-container">
+                <div class="legend-row">
+                    <span class="legend-indicator display-legend"></span>
+                    <span>Display</span>
+                </div>
+                <div class="legend-row">
+                    <span class="legend-indicator display-group-legend"></span>
+                    <span>Display Group</span>
+                </div>
+                <div class="legend-row">
+                    <span class="legend-indicator pixel-source-legend"></span>
+                    <span>Pixel Source</span>
+                </div>
+                <div class="legend-row">
+                    <span class="legend-indicator user-legend"></span>
+                    <span>User</span>
+                </div>
+                <div class="legend-row">
+                    <span class="legend-indicator group-legend"></span>
+                    <span>Group</span>
+                </div>
+                <div class="legend-row">
+                    <span class="legend-indicator ownership-legend"></span>
+                    <span>Ownership Relation</span>
+                </div>
+                <div class="legend-row">
+                    <span class="legend-indicator membership-legend"></span>
+                    <span>Membership Relation</span>
+                </div>
+                <div class="legend-row">
+                    <span class="legend-indicator sharing-legend"></span>
+                    <span>Sharing Relation</span>
+                </div>
+                <div class="legend-row">
+                    <span class="legend-indicator projection-legend"></span>
+                    <span>Projection Relation</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="instanceInfoSidebar" class="instance-sidebar">
+        <div class="hx-side-collapsible-heading-closed">Selected Instance Details</div>
+        <div class="hx-side-collapsible-heading-open">Details</div>
+        <div class="hx-side-collapsible-content">
+            <div class="info-table">
+            </div>
+        </div>
+    </div>
+
+    <!-- <i id="legend-toggle" class="legend-toggle floating-button fas fa-info-circle"></i> -->
+
+    <div id="tl-overlay" class="overlay-view tl"></div>
+    <div id="tr-overlay" class="overlay-view tr"></div>
+    <div id="bl-overlay" class="overlay-view bl"></div>
+    <div id="br-overlay" class="overlay-view br"></div>
+
+    <div id="color-picker-container"
+        class="color-picker">
+        <button id="colorPicker"
+            class="color-picker-toggle invisible"></button>
+    </div>
+
+    <div id="node-template-select-container"
+        class="node-template-select-container invisible ctxt-menu">
+        <div class="node-toggle">
+            <button id="node-visibility-toggle"
+                class="hx-btn node-visibility-toggle"
+                value="true">Display Node</button>
+        </div>
+        <div class="node-label-toggle">
+            <button id="node-label-visibility-toggle"
+                class="hx-btn node-label-visibility-toggle"
+                value="true">Display Label</button>
+        </div>
+        <div class="node-label-literal">
+            <div id="node-literal-relation"></div>
+        </div>
+        <div class="title">
+            <span>Shape Settings</span>
+        </div>
+        <div class="node-shapes">
+            <div id="shape-circle" class="shape-circle shape-choice selected">
+                <i class="far fa-circle"></i>
+            </div>
+            <div id="shape-square" class="shape-square shape-choice">
+                <i class="far fa-square"></i>
+            </div>
+        </div>
+        <div id="node-color" class="node-color color-choice">
+        </div>
+        <div class="node-size">
+            <input id="node-size-toggle"
+                class="node-size-toggle"
+                type="range"
+                min="25"
+                value="25"
+                max="100"
+                step="1">
+        </div>
+        <div class="title">
+            <span>Stroke Settings</span>
+        </div>
+        <div id="node-edge-shape-dropdown" class="stroke-shape">
+            <div class="stroke-preview dashed">
+            </div>
+        </div>
+        <div id="stroke-color" class="stroke-color color-choice">
+        </div>
+        <div class="stroke-size">
+            <input id="node-stroke-size-toggle"
+                class="stroke-size-toggle"
+                type="range"
+                min="1"
+                value="1"
+                max="7"
+                step="1">
+        </div>
+        <div class="stroke-toggle">
+            <button id="stroke-visibility-toggle"
+                class="hx-btn stroke-visibility-toggle"
+                value="true">Display Stroke</button>
+        </div>
+    </div>
+
+    <div id="node-template-icon-select-container"
+        class="node-template-icon-select-container invisible ctxt-menu">
+        <div class="node-icon-toggle">
+            <button id="node-icon-visibility-toggle"
+                class="hx-btn node-icon-visibility-toggle"
+                value="true">Display Icon</button>
+        </div>
+        <div id="node-icon-color" class="node-icon-color color-choice">
+        </div>
+        <div class="node-icon-size">
+            <input id="node-icon-size-toggle"
+                class="node-icon-size-toggle"
+                type="range"
+                min="18"
+                value="18"
+                max="100"
+                step="1">
+        </div>
+        <div class="icon-search">
+            <input
+                id="icon-search-input"
+                type="text"
+                name=""
+                placeholder="Search in icons...">
+        </div>
+        <div class="icon-selection-container">
+        </div>
+    </div>
+
+    <div id="edge-template-select-container"
+        class="edge-template-select-container invisible ctxt-menu">
+        <div class="edge-toggle">
+            <button id="edge-visibility-toggle"
+                class="hx-btn edge-visibility-toggle"
+                value="true">Display Relation</button>
+        </div>
+        <div id="edge-color-picker" class="edge-color color-choice">
+        </div>
+        <div id="edge-shape-dropdown" class="stroke-shape">
+            <div class="stroke-preview dashed">
+            </div>
+        </div>
+        <div class="edge-size">
+            <input id="edge-size-toggle"
+                class="edge-size-toggle"
+                type="range"
+                min="1"
+                value="1"
+                max="7"
+                step="0.2">
+        </div>
+        <div class="edge-label-toggle">
+            <button id="edge-label-visibility-toggle"
+                class="hx-btn edge-label-visibility-toggle"
+                value="true">Display Label</button>
+        </div>
+    </div>
+
+    <div id="stroke-types" style="visibility: hidden;">
+        <div class="stroke-types template-selector">
+            <div class="stroke-type">
+                <div class="stroke-preview solid"></div>
+            </div>
+            <div class="stroke-type">
+                <div class="stroke-preview dashed"></div>
+            </div>
+        </div>
+    </div>
+
+    <input type="file" id="upload" class="invisible">
+    <input type="file" id="upload-template" class="invisible">
+    <!-- <div class="search_container">
+        <input id="search_input" class="search_input" type="text" value="" placeholder="Search...">
+        <button id="sparql-query">Query</button>
+    </div> -->
+    <div class="cursor-element not-allowed">
+        <div class="cursor-content">
+            <span class="title"></span>
+            <input type="text" class="rename hidden"/>
+        </div>
+        <i class="icon_content fas fa-cut hidden"></i>
+    </div>
+
+    <!-- <div id="relation-list">
+        <div class="hx-collapsible-heading">Header</div>
+        <div class="hx-collapsible-content">
+            <div class="relation-content">
+                Content
+            </div>
+        </div>
+    </div> -->
+</body>
+</html>

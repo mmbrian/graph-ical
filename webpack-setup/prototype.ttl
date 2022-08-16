@@ -1,0 +1,58 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix foaf: <http://xmlns.com/foaf/0.1/#> .
+
+@prefix pxio: <http://www.pxio.de/#> .
+@prefix pxiopeople: <http://www.pxio.de/people/about/#> .
+@prefix entities: <http://www.pxio.de/cloud/entities/#> .
+
+@prefix data: <http://localhost:8080/data/test/> .
+
+# Groups
+data:groups.dev foaf:name "Dev Team"^^xsd:string; rdf:type foaf:Group; foaf:maker pxiopeople:users.mohsen .
+data:groups.sales foaf:name "Sales Team"^^xsd:string; rdf:type foaf:Group .
+
+# Users
+pxiopeople:users.mohsen foaf:name "Mohsen"^^xsd:string; rdf:type foaf:Person; foaf:member data:groups.dev .
+pxiopeople:users.al foaf:name "Alex"^^xsd:string; rdf:type foaf:Person; foaf:member data:groups.sales; foaf:member data:groups.dev .
+pxiopeople:users.tim foaf:name "Tim"^^xsd:string; rdf:type foaf:Person; foaf:member data:groups.sales .
+pxiopeople:users.paul foaf:name "Paul"^^xsd:string; rdf:type foaf:Person; foaf:member data:groups.dev .
+data:users.andre foaf:name "Andre"^^xsd:string; rdf:type foaf:Person .
+
+entities:DisplayGroup rdfs:label "Display Group"^^xsd:string; rdfs:subClassOf rdfs:Class .
+# Display Groups
+data:dg.dg1 foaf:name "DG1"^^xsd:string; rdf:type entities:DisplayGroup; foaf:maker pxiopeople:users.mohsen .
+
+entities:Display rdfs:label "Display"^^xsd:string; rdfs:subClassOf rdfs:Class .
+# Displays
+data:disp.d1 foaf:name "steve.pxio.local"^^xsd:string; rdf:type entities:Display; foaf:maker pxiopeople:users.tim; foaf:member data:dg.dg1 .
+data:disp.d2 foaf:name "Alex's Display"^^xsd:string; rdf:type entities:Display; foaf:maker pxiopeople:users.al .
+data:disp.d3 foaf:name "pompei.pxio.local.network"^^xsd:string; rdf:type entities:Display; foaf:maker pxiopeople:users.mohsen .
+data:disp.d4 foaf:name "norbert"^^xsd:string; rdf:type entities:Display; foaf:maker pxiopeople:users.mohsen; pxio:sharedWith pxiopeople:users.al .
+
+entities:PixelSource rdfs:label "Pixel Source"^^xsd:string; rdfs:subClassOf rdfs:Class .
+# Pixel Sources
+#data:source.s12 foaf:name "Cat Heaven: where cats go if they play their cards right"^^xsd:string; rdf:type entities:PixelSource; foaf:maker pxiopeople:users.mohsen; pxio:sharedWith #pxiopeople:users.al .
+#data:source.s13 foaf:name "Demo Video 1"^^xsd:string; rdf:type entities:PixelSource; foaf:maker pxiopeople:users.mohsen .
+#data:source.s14 foaf:name "Demo Video 2"^^xsd:string; rdf:type entities:PixelSource; foaf:maker pxiopeople:users.mohsen .
+#data:source.s15 foaf:name "Tim's Screen"^^xsd:string; rdf:type entities:PixelSource; foaf:maker pxiopeople:users.tim .
+#data:source.s16 foaf:name "Andre's Phone"^^xsd:string; rdf:type entities:PixelSource; foaf:maker data:users.andre .
+#data:source.s17 foaf:name "Mohsen's iPhone"^^xsd:string; rdf:type entities:PixelSource; foaf:maker pxiopeople:users.mohsen .
+#data:source.s18 foaf:name "Who's Cat is the Cutest?"^^xsd:string; rdf:type entities:PixelSource; foaf:maker pxiopeople:users.mohsen .
+#data:source.s20 foaf:name "Cats or Dogs? Get to know yourself"^^xsd:string; rdf:type entities:PixelSource; foaf:maker pxiopeople:users.mohsen .
+#data:source.s21 foaf:name "All my Cats"^^xsd:string; rdf:type entities:PixelSource; foaf:maker pxiopeople:users.mohsen .
+#data:source.s22 foaf:name "Perfect Human: Inside a Cat's Mind"^^xsd:string; rdf:type entities:PixelSource; foaf:maker pxiopeople:users.mohsen .
+#data:source.s23 foaf:name "Not just a Cat"^^xsd:string; rdf:type entities:PixelSource; foaf:maker pxiopeople:users.mohsen .
+# NOTE: removed ownership info for now since it clutters the visualization!
+data:source.s12 foaf:name "Cat Heaven: where cats go if they play their cards right"^^xsd:string; rdf:type entities:PixelSource; foaf:maker pxiopeople:users.mohsen; pxio:sharedWith pxiopeople:users.al .
+data:source.s13 foaf:name "Demo Video 1"^^xsd:string; rdf:type entities:PixelSource .
+data:source.s14 foaf:name "Demo Video 2"^^xsd:string; rdf:type entities:PixelSource .
+data:source.s15 foaf:name "Tim's Screen"^^xsd:string; rdf:type entities:PixelSource .
+data:source.s16 foaf:name "Andre's Phone"^^xsd:string; rdf:type entities:PixelSource .
+data:source.s17 foaf:name "Mohsen's iPhone"^^xsd:string; rdf:type entities:PixelSource .
+data:source.s18 foaf:name "Who's Cat is the Cutest?"^^xsd:string; rdf:type entities:PixelSource .
+data:source.s20 foaf:name "Cats or Dogs? Get to know yourself"^^xsd:string; rdf:type entities:PixelSource .
+data:source.s21 foaf:name "All my Cats"^^xsd:string; rdf:type entities:PixelSource .
+data:source.s22 foaf:name "Perfect Human: Inside a Cat's Mind"^^xsd:string; rdf:type entities:PixelSource .
+data:source.s23 foaf:name "Not just a Cat"^^xsd:string; rdf:type entities:PixelSource .

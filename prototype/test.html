@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style media="screen">
+        body, svg {
+            width: 500px;
+            height: 500px;
+        }
+        svg {
+            background: red;
+        }
+        circle {
+            fill: none;
+            stroke: green;
+        }
+        line {
+            stroke: blue;
+        }
+
+        .ring .back {
+            position: absolute;
+            background-color: blue;
+            width: 200px;
+            height: 200px;
+            top: 0;
+            left: 0;
+            border-radius: 200px;
+        }
+
+        .ring .back-centre {
+            position: absolute;
+            background-color: #fff;
+            width: 150px;
+            height: 150px;
+            top: 25px;
+            left: 25px;
+            border-radius: 150px;
+        }
+    </style>
+    <script type="text/javascript">
+
+    </script>
+</head>
+<body>
+    <svg width="500" height="500">
+        <defs>
+            <path d="m200,250 a50,50 0 1,1 100,0 a 50,50 0 1,1 -100,0" id="tpath"/>
+        </defs>
+        <circle cx="250" cy="250" r="50"/>
+        <line x1="200" y1="250" x2="300" y2="250"/>
+        <text>
+            <textPath startOffset="0" href="#tpath">
+                Text on a circle
+            </textPath>
+        </text>
+    </svg>
+    <div class="ring">
+        <div class="back"></div>
+        <div class="back-centre"></div>
+    </div>
+</body>
+</html>

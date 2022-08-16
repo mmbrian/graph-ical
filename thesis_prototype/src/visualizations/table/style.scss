@@ -1,0 +1,95 @@
+.table_ui_container {
+    // .table_header {
+    //     position: absolute;
+    //     top: 30px;
+    //     height: 48px;
+    //     width: 100%;
+    //     line-height: 48px;
+    //     display: flex;
+    //     flex-direction: row;
+    //     align-items: flex-start;
+    //     // grid-auto-flow: row;
+    //     // grid-template-rows: auto;
+    //     // grid-template-columns: 48px;
+    // }
+    .content_container {
+        position: absolute;
+        // top: 30px + 48px;
+        // height: calc(100% - 30px - 48px);
+        top: 30px;
+        height: calc(100% - 30px);
+        width: 100%;
+        overflow: auto;
+        /* width */
+        &::-webkit-scrollbar {
+            width: 10px;
+            height: 10px;
+        }
+
+        /* Track */
+        &::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+
+        /* Handle */
+        &::-webkit-scrollbar-thumb {
+            background: #888;
+        }
+
+        /* Handle on hover */
+        &::-webkit-scrollbar-thumb:hover {
+            background: #555;
+        }
+    }
+
+    .content {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-content: flex-start;
+        // overflow: hidden;
+        .item {
+            display: flex;
+            flex-direction: row;
+            // justify-content: space-between;
+            height: 48px;
+            width: 100%;
+            text-overflow: ellipsis;
+            overflow: hidden;
+            span {
+                display: flex;
+                flex-direction: column;
+                min-width: 100px;
+                max-width: 100px;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                line-height: 48px;
+                color: black;
+                padding-left: 9px;
+                // pointer-events: none; // important so that dragging events are fired properly
+                &.invisible {
+                  display: inline-block !important;
+                  visibility: hidden;
+                  padding: 0;
+                }
+            }
+            &:first-child {
+              position: sticky;
+              position: -webkit-sticky;
+              top: 0;
+              background: white;
+              border-bottom: 1px solid black;
+            }
+            &:hover {
+                background: #ddd;
+                span {
+                    color: black;
+                }
+                cursor: pointer;
+            }
+            &.selected {
+                background: #ccc;
+            }
+        }
+    }
+}

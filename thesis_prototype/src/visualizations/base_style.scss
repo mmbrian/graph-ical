@@ -1,0 +1,120 @@
+.view_base_container {
+    position: fixed;
+    top: 200px;
+    right: 100px;
+    width: 400px;
+    height: 330px;
+    background: white;
+    z-index: 10;
+
+    cursor: default;
+    // -webkit-box-shadow: 7px 7px 14px -7px rgba(0,0,0,0.45);
+    // -moz-box-shadow: 7px 7px 14px -7px rgba(0,0,0,0.45);
+    // box-shadow: 7px 7px 14px -7px rgba(0,0,0,0.45);
+    border: 1px solid black;
+}
+
+.view_header {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 12;
+    width: 100%;
+    height: 30px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    color: white;
+    font-weight: bold;
+    font-family: Verdana, sans-serif;
+    background: rgba(55, 129, 196, 1);
+    cursor: move;
+    &.user_mode {
+        cursor: auto;
+    }
+    span {
+        line-height: 30px;
+        padding-left: 5px;
+    }
+    .vis-toggles {
+        display: flex;
+    }
+    .vis-toggle {
+        height: 30px;
+        width: 30px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        cursor: pointer;
+        &:hover, i.selected {
+            color: black;
+        }
+        .edit-toggle, .add-instance-toggle {
+            &.invisible {
+                display: none;
+            }
+        }
+        &.user_mode {
+           display: none;
+        }
+    }
+    .view-title {
+        pointer-events: none;
+    }
+}
+
+.view_content_container {
+    overflow: hidden;
+    width: 100%;
+    height: 100%;
+    /* Track */
+    &::-webkit-scrollbar-track {
+        background: #f1f1f1;
+    }
+
+    /* Handle */
+    &::-webkit-scrollbar-thumb {
+        background: #888;
+    }
+
+    /* Handle on hover */
+    &::-webkit-scrollbar-thumb:hover {
+        background: #555;
+    }
+}
+
+.view_settings_container {
+    overflow: hidden;
+    overflow-y: scroll;
+    height: calc(100% - 44px);
+    margin-top: 30px;
+    padding: 7px;
+    .param-toggle {
+        margin: 0;
+        display: flex;
+        justify-content: space-between;
+    }
+}
+
+.hx-btn {
+    border: none !important;
+    border-radius: 0 !important;
+    width: 100%;
+    &.color-btn {
+        color: black !important;
+        background: transparent !important;
+    }
+}
+
+.hx-form-label {
+    margin: 7px 0 2px 0 !important;
+}
+
+.hx-input {
+    width: 100%;
+    margin-bottom: 7px !important;
+}
+
+.list_selector {
+    width: 100%;
+}

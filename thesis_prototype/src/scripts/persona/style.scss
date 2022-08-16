@@ -1,0 +1,99 @@
+#persona-list {
+   .persona-info {
+
+   }
+   .persona-item {
+     display: grid;
+     grid-template-columns: 1fr 2fr 32px 32px;
+     padding: 7px;
+     cursor: pointer;
+     .id-container {
+       display: flex;
+       flex-direction: row;
+       i.view-indicator {
+         line-height: 32px;
+         padding-left: 5px;
+       }
+     }
+     span.id {
+       color: #aaa;
+     }
+     span.label {
+       font-weight: bold;
+     }
+     input.label-input {
+       margin: 0;
+       border: none;
+       border-bottom: 1px solid black;
+     }
+     span {
+       line-height: 32px;
+     }
+     i:not(.view-indicator) {
+       visibility: hidden;
+       display: flex;
+       justify-content: center;
+       line-height: 32px;
+       cursor: pointer;
+       &:hover {
+         background: #ccc;
+       }
+     }
+     &:hover {
+       i {
+         visibility: visible;
+       }
+       background: #eee;
+     }
+   }
+   .add-persona-item {
+     padding: 7px;
+   }
+   .add-persona-btn {
+     display: flex;
+     background: #eee;
+     padding: 7px;
+     justify-content: center;
+     align-items: center;
+     font-size: 0.8em;
+     i {
+       padding-right: 5px;
+     }
+     cursor: pointer;
+     &:hover {
+       opacity: 0.7;
+     }
+   }
+   .add-persona-info {
+     input {
+       margin: 0;
+       min-width: 10px;
+       border: none;
+       border-bottom: 1px solid black;
+       margin-right: 5px;
+     }
+     input.persona-id {
+     }
+     input.persona-label {
+     }
+     display: grid;
+     grid-template-columns: 1fr 2fr 32px 32px;
+     i {
+       display: flex;
+       justify-content: center;
+       line-height: 32px;
+       cursor: pointer;
+       &:hover {
+         background: #ccc;
+       }
+     }
+   }
+
+   .hidden {
+     visibility: hidden;
+   }
+}
+
+#cancel-select-persona {
+
+}
