@@ -67,3 +67,5 @@ The workflow for using Graph-ical is partly described in my thesis document. A m
 
 ## NOTE
 Current version of Graph-ical (v0.9) is still beta and prone to bugs and errors. It is to be used as a prototype and not at all in a production environment. Also certain features discussed in the thesis document are either disabled or belong to older iterations of the software.
+
+Also this project and the latest version of this document are currently hosted publicly at https://github.com/mmbrian/graph-ical and will receive updates in the same repository.
