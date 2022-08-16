@@ -41,6 +41,7 @@ Once node v10 is setup, go to
 
 (where package.json resides) and run
 
+    npm install 
     npm run start
 
 Alternatively you can also build the project and host the build project locally. to this end first build the project via
